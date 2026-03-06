@@ -1,0 +1,21 @@
+library widgets;
+
+export 'rs_body.dart';
+export 'rs_aud_item.dart';
+export 'rs_flo_item.dart';
+export 'rs_img_item.dart';
+export 'rs_inp_widget.dart';
+export 'rs_lev_widget.dart';
+export 'rs_mod_she.dart';
+export 'rs_msg_e_scr.dart';
+export 'rs_msg_item.dart';
+export 'rs_msg_list_widget.dart';
+export 'rs_ric_t_item.dart';
+export 'rs_s_gif_load.dart';
+export 'rs_send_i.dart';
+export 'rs_t_item.dart';
+export 'rs_t_l_item.dart';
+export 'rs_tip_item.dart';
+export 'rs_typ_t_item.dart';
+export 'rs_un_l_widget.dart';
+export 'rs_v_item.dart';

@@ -1,0 +1,30 @@
+class RSRouteNames {
+  static const main = '/kx7m9pq';
+  static const launch = '/wr4n8jt';
+  static const application = '/bv5h2zy';
+  static const me = '/qd3f6lw';
+  static const discover = '/yt8k4mx';
+  static const chat = '/pj9r2vn';
+  static const search = '/gh6w3bs';
+  static const message = '/zl7t5kc';
+  static const imagePreview = '/xm4p8fq';
+  static const vip = '/nv2j9rw';
+  static const String video = '/ht6k3zy';
+  static const String gems = '/wq8m5dx';
+  static const String profile = '/bz3r7jv';
+  static const String mask = '/fp9n4kt';
+  static const String editMask = '/yl2w6hx';
+  static const String language = '/qj5t8mc';
+  static const String videoPreview = '/kr7p3vz';
+  static const String aiPhoto = '/dx4n9wl';
+  static const String cjmoments = '/mt6h2bq';
+  static const String phone = '/vz8j5fy';
+  static const String phoneGuide = '/lw3k7rx';
+  static const String countSku = '/pq9m4nt';
+  static const String undr = '/hx2v6jz';
+  static const String aiGenerateImage = '/bt7w5kq';
+  static const String aiGenerateLoading = '/fn4r8mx';
+  static const String aiGenerateResult = '/zy6p3lv';
+  static const String aiImage = '/jt9h2wk';
+  static const String aiGenerateHistory = '/qm5x7bn';
+}
