@@ -27,7 +27,7 @@ class RSFBUtils {
     try {
       final String facebookAppIdKey = Platform.isAndroid
           ? 'L9xM4vB'
-          : 'Hn6qY2v';
+          : 'W3sJ7gP';
       final String facebookClientTokenKey = Platform.isAndroid
           ? 'S2hT7kY'
           : 'Gz8c5Nt';

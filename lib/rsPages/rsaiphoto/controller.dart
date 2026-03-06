@@ -142,7 +142,7 @@ class RsaiphotoController extends GetxController {
         if (result.code == 200) {
           toLoadingWidget(result.data);
         } else {
-          RSToast.show(result.messsage ?? RSTextData.failedGenerate);
+          RSToast.show(result.message ?? RSTextData.failedGenerate);
         }
       } else {
         RSToast.show(RSTextData.failedGenerate);

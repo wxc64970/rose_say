@@ -3,10 +3,10 @@ import "dart:convert";
 class RSBaseModel<T> {
   final bool? success;
   final int? code;
-  final String? messsage;
+  final String? message;
   final T? data;
 
-  RSBaseModel({this.success, this.code, this.messsage, this.data});
+  RSBaseModel({this.success, this.code, this.message, this.data});
 
   factory RSBaseModel.fromRawJson(
     String str,
@@ -24,7 +24,7 @@ class RSBaseModel<T> {
     return RSBaseModel(
       success: json["success"],
       code: json["code"],
-      messsage: json["message"],
+      message: json["message"],
       data: _parseData<T>(json["data"], fromJsonT),
     );
   }
@@ -32,7 +32,7 @@ class RSBaseModel<T> {
   Map<String, dynamic> toJson() => {
     "success": success,
     "code": code,
-    "cnainu": messsage,
+    "message": message,
     "data": data,
   };
 
