@@ -24,25 +24,25 @@ class RSChaterPageModel {
 
   factory RSChaterPageModel.fromJson(Map<String, dynamic> json) =>
       RSChaterPageModel(
-        records: json["records"] == null
+        records: json["wixwfx"] == null
             ? []
             : List<ChaterModel>.from(
-                json["records"]!.map((x) => ChaterModel.fromJson(x)),
+                json["wixwfx"]!.map((x) => ChaterModel.fromJson(x)),
               ),
-        total: json["total"],
-        size: json["size"],
-        current: json["current"],
-        pages: json["pages"],
+        total: json["jzfwsr"],
+        size: json["wjvdhf"],
+        current: json["twugej"],
+        pages: json["qllmks"],
       );
 
   Map<String, dynamic> toJson() => {
-    "records": records == null
+    "wixwfx": records == null
         ? []
         : List<dynamic>.from(records!.map((x) => x.toJson())),
-    "total": total,
-    "size": size,
-    "current": current,
-    "pages": pages,
+    "jzfwsr": total,
+    "wjvdhf": size,
+    "twugej": current,
+    "qllmks": pages,
   };
 
   void operator [](String other) {}
@@ -171,7 +171,7 @@ class ChaterModel {
     bool? genVideo,
     bool? gems,
     bool? collect,
-    dynamic lastMesRSge,
+    dynamic lastMessage,
     dynamic intro,
     dynamic changeClothing,
     dynamic changeClothes,
@@ -235,133 +235,131 @@ class ChaterModel {
   String toRawJson() => json.encode(toJson());
 
   factory ChaterModel.fromJson(Map<String, dynamic> json) => ChaterModel(
-    id: json["id"],
-    age: json["age"],
-    aboutMe: json["about_me"],
-    media: json["media"] == null ? null : Media.fromJson(json["media"]),
+    id: json["oklstx"],
+    age: json["ujpjhv"],
+    aboutMe: json["teesdx"],
+    media: json["bouthu"] == null ? null : Media.fromJson(json["bouthu"]),
     images: json["images"] == null
         ? []
         : List<RoleImage>.from(
             json["images"]!.map((x) => RoleImage.fromJson(x)),
           ),
-    avatar: json["avatar"],
+    avatar: json["ovtlro"],
     avatarVideo: json["avatar_video"],
-    name: json["name"],
-    platform: json["platform"],
-    renderStyle: json["render_style"],
-    likes: json["likes"],
-    greetings: json["greetings"] == null
+    name: json["seqgrz"],
+    platform: json["bfibax"],
+    renderStyle: json["itdslh"],
+    likes: json["fomrul"],
+    greetings: json["obhynv"] == null
         ? []
-        : List<String>.from(json["greetings"]!.map((x) => x)),
-    greetingsVoice: json["greetings_voice"] == null
+        : List<String>.from(json["obhynv"]!.map((x) => x)),
+    greetingsVoice: json["tqwymz"] == null
         ? []
-        : List<dynamic>.from(json["greetings_voice"]!.map((x) => x)),
-    sessionCount: json["session_count"],
-    vip: json["vip"],
-    orderNum: json["order_num"],
-    tags: json["tags"] == null
+        : List<dynamic>.from(json["tqwymz"]!.map((x) => x)),
+    sessionCount: json["rlfbqe"],
+    vip: json["egtcas"],
+    orderNum: json["pwzhvy"],
+    tags: json["hwhekt"] == null
         ? []
-        : List<String>.from(json["tags"]!.map((x) => x)),
+        : List<String>.from(json["hwhekt"]!.map((x) => x)),
     tagType: json["tag_type"],
     scenario: json["scenario"],
     temperature: json["temperature"]?.toDouble(),
-    voiceId: json["voice_id"],
-    engine: json["engine"],
-    gender: json["gender"],
-    videoChat: json["video_chat"],
-    characterVideoChat: json["character_video_chat"] == null
+    voiceId: json["yldrdc"],
+    engine: json["szlirn"],
+    gender: json["bemcgy"],
+    videoChat: json["wkocey"],
+    characterVideoChat: json["hcuahz"] == null
         ? []
         : List<CharacterVideoChat>.from(
-            json["character_video_chat"]!.map(
-              (x) => CharacterVideoChat.fromJson(x),
-            ),
+            json["hcuahz"]!.map((x) => CharacterVideoChat.fromJson(x)),
           ),
-    genPhotoTags: json["gen_photo_tags"] == null
+    genPhotoTags: json["pkpebi"] == null
         ? []
-        : List<String>.from(json["gen_photo_tags"]!.map((x) => x)),
+        : List<String>.from(json["pkpebi"]!.map((x) => x)),
     genVideoTags: json["gen_video_tags"] == null
         ? []
         : List<String>.from(json["gen_video_tags"]!.map((x) => x)),
-    genPhoto: json["gen_photo"],
-    genVideo: json["gen_video"],
-    gems: json["gems"],
+    genPhoto: json["vvejmf"],
+    genVideo: json["puzvdk"],
+    gems: json["mkfwlu"],
     collect: json["collect"],
-    lastMessage: json["last_message"],
+    lastMessage: json["ivvbrk"],
     intro: json["intro"],
-    changeClothing: json["change_clothing"],
+    changeClothing: json["fszuux"],
     changeClothes: json["change_clothes"] == null
         ? []
         : List<ChangeClothe>.from(
             json["change_clothes"]!.map((x) => ChangeClothe.fromJson(x)),
           ),
-    updateTime: json["update_time"],
+    updateTime: json["biaazj"],
     chatNum: json["chat_num"],
     msgNum: json["msg_num"],
     mode: json["mode"],
-    cid: json["cid"],
-    cardNum: json["card_num"],
-    unlockCardNum: json["unlock_card_num"],
-    price: json["price"],
+    cid: json["oonagk"],
+    cardNum: json["iwwaes"],
+    unlockCardNum: json["kiatrc"],
+    price: json["mpltqj"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "age": age,
-    "about_me": aboutMe,
-    "media": media?.toJson(),
+    "oklstx": id,
+    "ujpjhv": age,
+    "teesdx": aboutMe,
+    "bouthu": media?.toJson(),
     "images": images == null
         ? []
         : List<dynamic>.from(images!.map((x) => x.toJson())),
-    "avatar": avatar,
+    "ovtlro": avatar,
     "avatar_video": avatarVideo,
-    "name": name,
-    "platform": platform,
-    "render_style": renderStyle,
-    "likes": likes,
-    "greetings": greetings == null
+    "seqgrz": name,
+    "bfibax": platform,
+    "itdslh": renderStyle,
+    "fomrul": likes,
+    "obhynv": greetings == null
         ? []
         : List<dynamic>.from(greetings!.map((x) => x)),
-    "greetings_voice": greetingsVoice == null
+    "tqwymz": greetingsVoice == null
         ? []
         : List<dynamic>.from(greetingsVoice!.map((x) => x)),
-    "session_count": sessionCount,
-    "vip": vip,
-    "order_num": orderNum,
-    "tags": tags == null ? [] : List<dynamic>.from(tags!.map((x) => x)),
+    "rlfbqe": sessionCount,
+    "egtcas": vip,
+    "pwzhvy": orderNum,
+    "hwhekt": tags == null ? [] : List<dynamic>.from(tags!.map((x) => x)),
     "tag_type": tagType,
     "scenario": scenario,
     "temperature": temperature,
-    "voice_id": voiceId,
-    "engine": engine,
-    "gender": gender,
-    "video_chat": videoChat,
-    "character_video_chat": characterVideoChat == null
+    "yldrdc": voiceId,
+    "szlirn": engine,
+    "bemcgy": gender,
+    "wkocey": videoChat,
+    "hcuahz": characterVideoChat == null
         ? []
         : List<dynamic>.from(characterVideoChat!.map((x) => x.toJson())),
-    "gen_photo_tags": genPhotoTags == null
+    "pkpebi": genPhotoTags == null
         ? []
         : List<dynamic>.from(genPhotoTags!.map((x) => x)),
     "gen_video_tags": genVideoTags == null
         ? []
         : List<dynamic>.from(genVideoTags!.map((x) => x)),
-    "gen_photo": genPhoto,
-    "gen_video": genVideo,
-    "gems": gems,
+    "vvejmf": genPhoto,
+    "puzvdk": genVideo,
+    "mkfwlu": gems,
     "collect": collect,
-    "last_message": lastMessage,
+    "ivvbrk": lastMessage,
     "intro": intro,
-    "change_clothing": changeClothing,
+    "fszuux": changeClothing,
     "change_clothes": changeClothes == null
         ? []
         : List<dynamic>.from(changeClothes!.map((x) => x.toJson())),
-    "update_time": updateTime,
+    "biaazj": updateTime,
     "chat_num": chatNum,
     "msg_num": msgNum,
     "mode": mode,
-    "cid": cid,
-    "card_num": cardNum,
-    "unlock_card_num": unlockCardNum,
-    "price": price,
+    "oonagk": cid,
+    "iwwaes": cardNum,
+    "kiatrc": unlockCardNum,
+    "mpltqj": price,
   };
 }
 
@@ -413,25 +411,25 @@ class CharacterVideoChat {
 
   factory CharacterVideoChat.fromJson(Map<String, dynamic> json) =>
       CharacterVideoChat(
-        id: json["id"],
-        characterId: json["character_id"],
+        id: json["oklstx"],
+        characterId: json["ugniji"],
         tag: json["tag"],
-        duration: json["duration"],
-        url: json["url"],
+        duration: json["ppvgce"],
+        url: json["jpdkbw"],
         gifUrl: json["gif_url"],
-        createTime: json["create_time"],
-        updateTime: json["update_time"],
+        createTime: json["zdcetu"],
+        updateTime: json["biaazj"],
       );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "character_id": characterId,
+    "oklstx": id,
+    "ugniji": characterId,
     "tag": tag,
-    "duration": duration,
-    "url": url,
+    "ppvgce": duration,
+    "jpdkbw": url,
     "gif_url": gifUrl,
-    "create_time": createTime,
-    "update_time": updateTime,
+    "zdcetu": createTime,
+    "biaazj": updateTime,
   };
 }
 
@@ -486,24 +484,24 @@ class RoleImage {
   String toRawJson() => json.encode(toJson());
 
   factory RoleImage.fromJson(Map<String, dynamic> json) => RoleImage(
-    id: json["id"],
-    createTime: json["create_time"],
-    updateTime: json["update_time"],
+    id: json["oklstx"],
+    createTime: json["zdcetu"],
+    updateTime: json["biaazj"],
     imageUrl: json["image_url"],
-    modelId: json["model_id"],
-    gems: json["gems"],
+    modelId: json["dhbdlh"],
+    gems: json["mkfwlu"],
     imgType: json["img_type"],
     imgRemark: json["img_remark"],
     unlocked: json["unlocked"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "create_time": createTime,
-    "update_time": updateTime,
+    "oklstx": id,
+    "zdcetu": createTime,
+    "biaazj": updateTime,
     "image_url": imageUrl,
-    "model_id": modelId,
-    "gems": gems,
+    "dhbdlh": modelId,
+    "mkfwlu": gems,
     "img_type": imgType,
     "img_remark": imgRemark,
     "unlocked": unlocked,
@@ -523,13 +521,13 @@ class Media {
   String toRawJson() => json.encode(toJson());
 
   factory Media.fromJson(Map<String, dynamic> json) => Media(
-    characterImages: json["character_images"] == null
+    characterImages: json["wopsry"] == null
         ? []
-        : List<String>.from(json["character_images"]!.map((x) => x)),
+        : List<String>.from(json["wopsry"]!.map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
-    "character_images": characterImages == null
+    "wopsry": characterImages == null
         ? []
         : List<dynamic>.from(characterImages!.map((x) => x)),
   };

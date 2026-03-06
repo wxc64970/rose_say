@@ -123,8 +123,8 @@ void replaceApiPath(String filePath) {
 
   // 遍历替换：只替换等号后单引号内的路径内容
   for (final entry in replacementMap.entries) {
-    final String newPathSegment = entry.value; // 原路径中的片段（如register）
-    final String oldPathSegment = entry.key; // 要替换成的片段（如auiasv）
+    final String newPathSegment = entry.key; // 原路径中的片段（如register）
+    final String oldPathSegment = entry.value; // 要替换成的片段（如auiasv）
     print('替换 $oldPathSegment 为 $newPathSegment');
 
     // 正则匹配规则：
@@ -359,8 +359,8 @@ void replaceJsonModel(String folderPath) {
 
       // 遍历所有需要替换的值
       for (final entry in replacementMap.entries) {
-        final String oldKey = entry.value;
-        final String newValue = entry.key;
+        final String oldKey = entry.key;
+        final String newValue = entry.value;
 
         // 替换 JSON 对象中的键名: "key": value
         replacedContent = replacedContent.replaceAll(

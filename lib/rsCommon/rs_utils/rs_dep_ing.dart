@@ -94,7 +94,7 @@ class RSDependencyInjection {
 
     // 获取设备ID
     final deviceId = await storage.getDeviceId();
-    // final encryptedDeviceId = RSCryptoUtil.encrypt(deviceId);
+    final encryptedDeviceId = RSCryptoUtil.encrypt(deviceId);
 
     // 获取应用版本
     final version = await RSInfoUtils.version();
@@ -109,10 +109,10 @@ class RSDependencyInjection {
 
     // 批量设置全局请求头
     RSDioClient.instance.setHeaders({
-      // 'FyDXhtibFxTDOP0Hp': platform,
-      // 'FyDXhtibFxTDOP0H': encryptedDeviceId,
-      "Platform": platform,
-      "device-id": deviceId,
+      'zyycfysavbpgfefbp': platform,
+      'zyycfysavbpgfefb': encryptedDeviceId,
+      // "Platform": platform,
+      // "device-id": deviceId,
       'version': version,
       'lang': lang,
     });

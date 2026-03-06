@@ -5,21 +5,21 @@ enum SAEnv { dev, prod }
 class RSAppConstants {
   // API相关常量
   // 应用名称
-  static const appName = 'Sose Say';
-  // static const String baseUrl = '';
-  static const String baseUrl = 'https://liuhaipeng3.powerfulclean.net';
+  static const appName = 'Rose Say';
+  static const String baseUrl = 'https://server.zyycfysavbpgfefb.com';
+  // static const String baseUrl = 'https://liuhaipeng3.powerfulclean.net'; //
   static const bool isDebug = true;
   static const String apiVersion = 'v1';
-  static const String apiPrefix = 'pppdgb7roqqonqzc';
+  static const String apiPrefix = 'zyycfysavbpgfefb';
   static const String bundleIdIOS = '';
   static const String bundleIdAndroid = '';
   static const String platformIos = 'rose';
   static const String platformAndroid = 'rose-android';
-  static const String adjustId = 'blvcr5x440lc';
-  static const String privacypolicyUrl = 'https://sparkaiweb.com/privacy/';
-  static const String termsUrl = 'https://sparkaiweb.com/terms/';
-  static const String email = 'sparkaiii@proton.me';
-  static const String appId = '6757587521';
+  static const String adjustId = '9p2ougjvcc1s';
+  static const String privacypolicyUrl = 'https://rosesayapp.com/privacy/';
+  static const String termsUrl = 'https://rosesayapp.com/terms/';
+  static const String email = 'rosesay1@proton.me';
+  static const String appId = '6760009267';
 
   // 本地存储键名
   static const String keyUserInfo = 'S7pR2t';

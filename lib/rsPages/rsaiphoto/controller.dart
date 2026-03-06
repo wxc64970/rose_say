@@ -139,7 +139,11 @@ class RsaiphotoController extends GetxController {
       final result = await ImageAPI.avatarAiGenerateGems(params);
       RSLoading.close();
       if (result != null) {
-        toLoadingWidget(result);
+        if (result.code == 200) {
+          toLoadingWidget(result.data);
+        } else {
+          RSToast.show(result.messsage ?? RSTextData.failedGenerate);
+        }
       } else {
         RSToast.show(RSTextData.failedGenerate);
       }

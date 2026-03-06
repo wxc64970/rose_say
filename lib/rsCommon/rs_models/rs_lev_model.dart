@@ -14,16 +14,16 @@ class RSLevelModel {
   String toRawJson() => json.encode(toJson());
 
   factory RSLevelModel.fromJson(Map<String, dynamic> json) => RSLevelModel(
-    id: json['id'],
-    level: json['level'],
-    reward: json['reward'],
-    title: json['title'],
+    id: json['oklstx'],
+    level: json['tenlfz'],
+    reward: json['bxighm'],
+    title: json['sejfee'],
   );
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'level': level,
-    'reward': reward,
-    'title': title,
+    'oklstx': id,
+    'tenlfz': level,
+    'bxighm': reward,
+    'sejfee': title,
   };
 }

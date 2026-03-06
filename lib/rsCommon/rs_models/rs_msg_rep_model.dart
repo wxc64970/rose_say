@@ -16,17 +16,17 @@ class RSMsgReplayModel {
 
   factory RSMsgReplayModel.fromJson(Map<String, dynamic> json) =>
       RSMsgReplayModel(
-        convId: json['conv_id'],
-        msgId: json['msg_id'],
-        answer: json['answer'] == null
+        convId: json['fuvtng'],
+        msgId: json['xycodp'],
+        answer: json['vsogaa'] == null
             ? null
-            : MessageAnswerModel.fromJson(json['answer']),
+            : MessageAnswerModel.fromJson(json['vsogaa']),
       );
 
   Map<String, dynamic> toJson() => {
-    'conv_id': convId,
-    'msg_id': msgId,
-    'answer': answer?.toJson(),
+    'fuvtng': convId,
+    'xycodp': msgId,
+    'vsogaa': answer?.toJson(),
   };
 }
 
@@ -69,35 +69,35 @@ class MessageAnswerModel {
   factory MessageAnswerModel.fromJson(Map<String, dynamic> json) =>
       MessageAnswerModel(
         content: json['content'],
-        src: json['source'],
-        lockLvl: json['lock_level'],
-        lockMed: json['lock_level_media'],
-        voiceUrl: json['voice_url'],
-        voiceDur: json['voice_duration'],
+        src: json['deenhq'],
+        lockLvl: json['vkrwnd'],
+        lockMed: json['awlqoj'],
+        voiceUrl: json['mzyuei'],
+        voiceDur: json['fkoevy'],
         resUrl: json['res_url'],
-        duration: json['duration'],
-        thumbUrl: json['thumbnail_url'],
+        duration: json['ppvgce'],
+        thumbUrl: json['uzlohq'],
         translateContent: json['translate_content'],
-        upgrade: json['upgrade'],
-        rewards: json['rewards'],
-        appUserChatLevel: json['app_user_chat_level'] == null
+        upgrade: json['egspjo'],
+        rewards: json['eeusex'],
+        appUserChatLevel: json['zafnvm'] == null
             ? null
-            : ChatAnserLevel.fromJson(json['app_user_chat_level']),
+            : ChatAnserLevel.fromJson(json['zafnvm']),
       );
 
   Map<String, dynamic> toJson() => {
     'content': content,
-    'source': src,
-    'lock_level': lockLvl,
-    'lock_level_media': lockMed,
-    'voice_url': voiceUrl,
-    'voice_duration': voiceDur,
+    'deenhq': src,
+    'vkrwnd': lockLvl,
+    'awlqoj': lockMed,
+    'mzyuei': voiceUrl,
+    'fkoevy': voiceDur,
     'res_url': resUrl,
-    'duration': duration,
-    'thumbnail_url': thumbUrl,
+    'ppvgce': duration,
+    'uzlohq': thumbUrl,
     'translate_content': translateContent,
-    'upgrade': upgrade,
-    'rewards': rewards,
-    'app_user_chat_level': appUserChatLevel,
+    'egspjo': upgrade,
+    'eeusex': rewards,
+    'zafnvm': appUserChatLevel,
   };
 }

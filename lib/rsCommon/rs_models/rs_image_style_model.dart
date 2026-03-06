@@ -32,19 +32,19 @@ class RSImageStyle {
   });
 
   RSImageStyle.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
+    id = json['oklstx'];
+    name = json['seqgrz'];
     remark = json['remark'];
     cover = json['cover'];
-    styleType = json['style_type'];
+    styleType = json['jvneyj'];
     modelName = json['model_name'];
-    loraModel = json['lora_model'];
-    loraStrength = json['lora_strength'];
-    loraPath = json['lora_path'];
-    orderNum = json['order_num'];
-    platform = json['platform'];
-    createTime = json['create_time'];
-    updateTime = json['update_time'];
+    loraModel = json['yvrtja'];
+    loraStrength = json['lpccff'];
+    loraPath = json['lbgjox'];
+    orderNum = json['pwzhvy'];
+    platform = json['bfibax'];
+    createTime = json['zdcetu'];
+    updateTime = json['biaazj'];
     del = json['del'];
   }
 

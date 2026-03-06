@@ -27,20 +27,20 @@ class RSAiAvatarOptions {
 
   factory RSAiAvatarOptions.fromJson(Map<String, dynamic> json) =>
       RSAiAvatarOptions(
-        id: json["id"],
-        name: json["name"],
-        tags: json["tags"] == null
+        id: json["oklstx"],
+        name: json["seqgrz"],
+        tags: json["hwhekt"] == null
             ? []
             : List<RSAiAvatarTag>.from(
-                json["tags"]!.map((x) => RSAiAvatarTag.fromJson(x)),
+                json["hwhekt"]!.map((x) => RSAiAvatarTag.fromJson(x)),
               ),
         required: json["required"],
       );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "tags": tags == null
+    "oklstx": id,
+    "seqgrz": name,
+    "hwhekt": tags == null
         ? []
         : List<dynamic>.from(tags!.map((x) => x.toJson())),
     "required": required,
@@ -78,16 +78,16 @@ class RSAiAvatarTag {
   String toRawJson() => json.encode(toJson());
 
   factory RSAiAvatarTag.fromJson(Map<String, dynamic> json) => RSAiAvatarTag(
-    id: json["id"],
+    id: json["oklstx"],
     label: json["label"],
-    value: json["value"],
+    value: json["xqohrb"],
     isSelected: false, // API数据默认未选中
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
+    "oklstx": id,
     "label": label,
-    "value": value,
+    "xqohrb": value,
     // isSelected 不需要序列化到API，只用于本地状态管理
   };
 }

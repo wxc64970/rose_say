@@ -14,7 +14,7 @@ class RSLang {
   String toRawJson() => json.encode(toJson());
 
   factory RSLang.fromJson(Map<String, dynamic> json) =>
-      RSLang(label: json["label"], value: json["value"]);
+      RSLang(label: json["label"], value: json["xqohrb"]);
 
-  Map<String, dynamic> toJson() => {"label": label, "value": value};
+  Map<String, dynamic> toJson() => {"label": label, "xqohrb": value};
 }

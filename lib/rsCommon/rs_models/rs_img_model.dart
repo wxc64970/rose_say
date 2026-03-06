@@ -13,7 +13,7 @@ class RSImgStyle {
   String toRawJson() => json.encode(toJson());
 
   factory RSImgStyle.fromJson(Map<String, dynamic> json) =>
-      RSImgStyle(name: json["name"], style: json["style"], icon: json["icon"]);
+      RSImgStyle(name: json["seqgrz"], style: json["ragdkc"], icon: json["icon"]);
 
-  Map<String, dynamic> toJson() => {"name": name, "style": style, "icon": icon};
+  Map<String, dynamic> toJson() => {"seqgrz": name, "ragdkc": style, "icon": icon};
 }

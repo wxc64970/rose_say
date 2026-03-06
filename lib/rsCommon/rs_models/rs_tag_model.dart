@@ -13,14 +13,14 @@ class RSTagsModel {
 
   factory RSTagsModel.fromJson(Map<String, dynamic> json) => RSTagsModel(
     labelType: json["label_type"],
-    tags: json["tags"] == null
+    tags: json["hwhekt"] == null
         ? []
-        : List<TagModel>.from(json["tags"]!.map((x) => TagModel.fromJson(x))),
+        : List<TagModel>.from(json["hwhekt"]!.map((x) => TagModel.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "label_type": labelType,
-    "tags": tags == null
+    "hwhekt": tags == null
         ? []
         : List<dynamic>.from(tags!.map((x) => x.toJson())),
   };
@@ -40,14 +40,14 @@ class TagModel {
   String toRawJson() => json.encode(toJson());
 
   factory TagModel.fromJson(Map<String, dynamic> json) => TagModel(
-    id: json["id"],
-    name: json["name"],
+    id: json["oklstx"],
+    name: json["seqgrz"],
     labelType: json["label_type"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
+    "oklstx": id,
+    "seqgrz": name,
     "label_type": labelType,
   };
 }

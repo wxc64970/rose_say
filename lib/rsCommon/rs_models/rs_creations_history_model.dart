@@ -20,14 +20,14 @@ class RSCreationsHistory {
   });
 
   RSCreationsHistory.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['oklstx'];
     type = json['type'];
     originUrl = json['origin_url'];
     resultUrl = json['result_url'];
-    style = json['style'];
-    genImgId = json['gen_img_id'];
-    taskId = json['task_id'];
-    createTime = json['create_time'];
+    style = json['ragdkc'];
+    genImgId = json['ouumon'];
+    taskId = json['btxred'];
+    createTime = json['zdcetu'];
   }
 
   Map<String, dynamic> toJson() {

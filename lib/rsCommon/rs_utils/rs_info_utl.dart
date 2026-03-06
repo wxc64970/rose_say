@@ -228,16 +228,16 @@ class RSInfoUtils {
 
       // 检查时区名称是否包含中国相关标识（中国大陆、香港、澳门）
       final chineseTimeZones = [
-        'Shanghai',
-        'Urumqi',
-        'Chongqing',
-        'Chungking',
-        'Harbin',
-        'Kashgar',
-        'Beijing',
-        'Hong_Kong',
-        'Macau',
-        'PRC',
+        '56d75a505ef57430c785ecbb48666cba',
+        'dfe88c44876974cc099651734601099b',
+        'e83b90cc838de0580099bb7a030d9e6c',
+        '2a38c67d1a194a102a67e4bae7068a57',
+        '66e994a5bd3ff3b09f4ca2aa76efac97',
+        'e2ef258464a2437f6b61e32a29773076',
+        '9939c8359a9c61ed8d270ba91a8a2fd6',
+        'a73218cdce2cbe9eab33a7bfe1346304',
+        'ca776fcaf9fbce08847000cf2b185bbb',
+        '4fac52d671437152f258afd8db194e59',
       ];
 
       for (var timezone in chineseTimeZones) {

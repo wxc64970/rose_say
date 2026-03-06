@@ -60,7 +60,7 @@ class RSDioClient {
         connectTimeout: const Duration(milliseconds: _connectTimeout),
         receiveTimeout: const Duration(milliseconds: _receiveTimeout),
         sendTimeout: const Duration(milliseconds: _sendTimeout),
-        responseType: ResponseType.json, // 关闭自动解析
+        responseType: ResponseType.plain, // 关闭自动解析
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -102,7 +102,7 @@ class RSDioClient {
     _dio.interceptors.add(RSHeaderInterceptor());
 
     // Add crypto interceptor
-    // _dio.interceptors.add(RSCryptoInterceptor());
+    _dio.interceptors.add(RSCryptoInterceptor());
 
     // Add error interceptor
     _dio.interceptors.add(ErrorInterceptor());

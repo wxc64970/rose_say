@@ -12,7 +12,7 @@ class RSImageHistroy {
   String toRawJson() => json.encode(toJson());
 
   factory RSImageHistroy.fromJson(Map<String, dynamic> json) =>
-      RSImageHistroy(id: json['id'], url: json['url']);
+      RSImageHistroy(id: json['oklstx'], url: json['jpdkbw']);
 
-  Map<String, dynamic> toJson() => {'id': id, 'url': url};
+  Map<String, dynamic> toJson() => {'oklstx': id, 'jpdkbw': url};
 }

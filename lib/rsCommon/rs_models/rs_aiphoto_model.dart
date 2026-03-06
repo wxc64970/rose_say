@@ -4,7 +4,7 @@ class RSAiPhoto {
 
   RSAiPhoto({this.platform, this.itemConfigs});
   RSAiPhoto.fromJson(Map<String, dynamic> json) {
-    platform = json['platform'];
+    platform = json['bfibax'];
     if (json['item_configs'] != null) {
       itemConfigs = <ItemConfigs>[];
       json['item_configs'].forEach((v) {
@@ -40,10 +40,10 @@ class ItemConfigs {
 
   ItemConfigs.fromJson(Map<String, dynamic> json) {
     itemType = json['item_type'];
-    title = json['title'];
+    title = json['sejfee'];
     text = json['text'];
     imageUrl = json['image_url'];
-    orderNum = json['order_num'];
+    orderNum = json['pwzhvy'];
   }
 
   Map<String, dynamic> toJson() {

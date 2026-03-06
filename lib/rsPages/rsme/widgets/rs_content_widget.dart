@@ -29,7 +29,7 @@ class ContentWidget extends GetView<RsmeController> {
               SizedBox(height: 24.w),
               Container(
                 margin: EdgeInsets.only(bottom: 32.w),
-                padding: EdgeInsets.all(32.w),
+                // padding: EdgeInsets.all(32.w),
                 decoration: BoxDecoration(
                   color: RSAppColors.primaryColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(32.r),
@@ -39,6 +39,7 @@ class ContentWidget extends GetView<RsmeController> {
                   title: controller.nickname,
                   onTap: controller.changeNickName,
                   top: 0,
+                  padding: 32.w,
                 ),
               ),
               Container(

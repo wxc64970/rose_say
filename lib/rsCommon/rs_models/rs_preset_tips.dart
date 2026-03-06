@@ -8,11 +8,11 @@ class PresetTips {
   PresetTips({this.id, this.titleEn, this.titleCn, this.category, this.prompt});
 
   PresetTips.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = json['oklstx'];
     titleEn = json['title_en'];
     titleCn = json['title_cn'];
     category = json['category'];
-    prompt = json['prompt'];
+    prompt = json['gcvopb'];
   }
 
   Map<String, dynamic> toJson() {

@@ -12,7 +12,7 @@ class RSOrderModel {
   String toRawJson() => json.encode(toJson());
 
   factory RSOrderModel.fromJson(Map<String, dynamic> json) =>
-      RSOrderModel(id: json["id"], orderNo: json["order_no"]);
+      RSOrderModel(id: json["oklstx"], orderNo: json["zobdms"]);
 
-  Map<String, dynamic> toJson() => {"id": id, "order_no": orderNo};
+  Map<String, dynamic> toJson() => {"oklstx": id, "zobdms": orderNo};
 }

@@ -12,11 +12,11 @@ class RSImgUpModle {
   String toRawJson() => json.encode(toJson());
 
   factory RSImgUpModle.fromJson(Map<String, dynamic> json) =>
-      RSImgUpModle(estimatedTime: json['estimated_time'], uid: json['uid']);
+      RSImgUpModle(estimatedTime: json['pjuush'], uid: json['iddcfg']);
 
   Map<String, dynamic> toJson() => {
-    'estimated_time': estimatedTime,
-    'uid': uid,
+    'pjuush': estimatedTime,
+    'iddcfg': uid,
   };
 }
 
@@ -37,7 +37,7 @@ class ImageResultRes {
         ? []
         : List<String>.from(json['results']!.map((x) => x)),
     status: json['status'],
-    uid: json['uid'],
+    uid: json['iddcfg'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -45,7 +45,7 @@ class ImageResultRes {
         ? []
         : List<dynamic>.from(results!.map((x) => x)),
     'status': status,
-    'uid': uid,
+    'iddcfg': uid,
   };
 }
 
@@ -87,14 +87,14 @@ class ImageVideoResItem {
 
   factory ImageVideoResItem.fromJson(Map<String, dynamic> json) =>
       ImageVideoResItem(
-        uid: json["uid"],
+        uid: json["iddcfg"],
         status: json["status"],
-        resultPath: json["result_path"],
+        resultPath: json["zgofyn"],
       );
 
   Map<String, dynamic> toJson() => {
-    "uid": uid,
+    "iddcfg": uid,
     "status": status,
-    "result_path": resultPath,
+    "zgofyn": resultPath,
   };
 }

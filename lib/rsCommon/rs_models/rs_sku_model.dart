@@ -55,34 +55,34 @@ class RSSkModel {
   String toRawJson() => json.encode(toJson());
 
   factory RSSkModel.fromJson(Map<String, dynamic> json) => RSSkModel(
-    id: json["id"],
+    id: json["oklstx"],
     sku: json["sku"],
-    name: json["name"],
+    name: json["seqgrz"],
     number: json["number"],
     defaultSku: json["default_sku"],
     lifetime: json["lifetime"],
     skuType: json["sku_type"],
-    createImg: json["create_img"],
-    createVideo: json["create_video"],
+    createImg: json["ptumks"],
+    createVideo: json["molfai"],
     shelf: json["shelf"],
     tag: json["tag"],
-    orderNum: json["order_num"],
+    orderNum: json["pwzhvy"],
     displayHide: json["display_hide"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
+    "oklstx": id,
     "sku": sku,
-    "name": name,
+    "seqgrz": name,
     "number": number,
     "default_sku": defaultSku,
     "lifetime": lifetime,
     "sku_type": skuType,
-    "create_img": createImg,
-    "create_video": createVideo,
+    "ptumks": createImg,
+    "molfai": createVideo,
     "shelf": shelf,
     "tag": tag,
-    "order_num": orderNum,
+    "pwzhvy": orderNum,
     "display_hide": displayHide,
   };
 }

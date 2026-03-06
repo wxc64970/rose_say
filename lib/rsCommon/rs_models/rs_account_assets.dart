@@ -48,8 +48,8 @@ class RSAccountAssets {
 
   factory RSAccountAssets.fromJson(Map<String, dynamic> json) =>
       RSAccountAssets(
-        id: json["id"],
-        userId: json["user_id"],
+        id: json["oklstx"],
+        userId: json["skhehf"],
         createImgNum: json["create_img_num"],
         infoAiWriteNum: json["info_ai_write_num"],
         imgAiWriteNum: json["img_ai_write_num"],
@@ -59,8 +59,8 @@ class RSAccountAssets {
       );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "user_id": userId,
+    "oklstx": id,
+    "skhehf": userId,
     "create_img_num": createImgNum,
     "info_ai_write_num": infoAiWriteNum,
     "img_ai_write_num": imgAiWriteNum,

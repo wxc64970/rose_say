@@ -13,6 +13,7 @@ class SettingItem extends GetView<RsmeController> {
     required this.top,
     this.subtitle,
     this.subWidget,
+    this.padding,
   }) : super(key: key);
   final String? sectionTitle;
   final String title;
@@ -20,6 +21,7 @@ class SettingItem extends GetView<RsmeController> {
   final Function()? onTap;
   final double top;
   final Widget? subWidget;
+  final double? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class SettingItem extends GetView<RsmeController> {
           onTap: onTap,
           child: Container(
             margin: EdgeInsets.only(top: top.w),
+            padding: EdgeInsets.all(padding ?? 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -25,21 +25,21 @@ class RSMaskModel {
   String toRawJson() => json.encode(toJson());
 
   factory RSMaskModel.fromJson(Map<String, dynamic> json) => RSMaskModel(
-    id: json["id"],
-    userId: json["user_id"],
+    id: json["oklstx"],
+    userId: json["skhehf"],
     profileName: json["profile_name"],
-    gender: json["gender"],
-    age: json["age"],
+    gender: json["bemcgy"],
+    age: json["ujpjhv"],
     description: json["description"],
     otherInfo: json["other_info"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "user_id": userId,
+    "oklstx": id,
+    "skhehf": userId,
     "profile_name": profileName,
-    "gender": gender,
-    "age": age,
+    "bemcgy": gender,
+    "ujpjhv": age,
     "description": description,
     "other_info": otherInfo,
   };

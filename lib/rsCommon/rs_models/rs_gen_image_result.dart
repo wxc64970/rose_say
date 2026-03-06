@@ -24,7 +24,7 @@ class RSGenAvatarResult {
 
   factory RSGenAvatarResult.fromJson(Map<String, dynamic> json) =>
       RSGenAvatarResult(
-        id: json["id"],
+        id: json["oklstx"],
         imgs: json["imgs"],
         results: json["results"] == null
             ? []
@@ -34,7 +34,7 @@ class RSGenAvatarResult {
       );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
+    "oklstx": id,
     "imgs": imgs,
     "results": results == null
         ? []
@@ -68,14 +68,14 @@ class ExtAvatar {
   String toRawJson() => json.encode(toJson());
 
   factory ExtAvatar.fromJson(Map<String, dynamic> json) => ExtAvatar(
-    id: json["id"],
-    genImgId: json["gen_img_id"],
+    id: json["oklstx"],
+    genImgId: json["ouumon"],
     imgPath: json["img_path"],
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "gen_img_id": genImgId,
+    "oklstx": id,
+    "ouumon": genImgId,
     "img_path": imgPath,
   };
 }
