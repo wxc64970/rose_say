@@ -171,7 +171,7 @@ class ChaterModel {
     bool? genVideo,
     bool? gems,
     bool? collect,
-    dynamic lastMesRSge,
+    dynamic lastMessage,
     dynamic intro,
     dynamic changeClothing,
     dynamic changeClothes,

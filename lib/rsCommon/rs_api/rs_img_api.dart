@@ -324,15 +324,13 @@ class ImageAPI {
   }
 
   // 生成头像消耗gems
-  static Future<int?> avatarAiGenerateGems(Map<String, dynamic> params) async {
+  static Future<RSBaseModel?> avatarAiGenerateGems(
+    Map<String, dynamic> params,
+  ) async {
     try {
       var res = await api.post(RSApiUrl.generateAvatarGemsUrl, data: params);
       final result = RSBaseModel.fromJson(res.data, null);
-      final data = result.data;
-      if (data != null && data is int) {
-        return data;
-      }
-      return null;
+      return result;
     } catch (e) {
       log.e(e);
       return null;
