@@ -38,7 +38,7 @@ class RSThirdPartyService {
     try {
       final storage = Get.find<RSLocalStorage>();
       String deviceId = await storage.getDeviceId(isOrigin: true);
-      String appToken = '4ulfgemf3hq8';
+      String appToken = RSAppConstants.adjustId;
       AdjustEnvironment env = AdjustEnvironment.production;
 
       AdjustConfig config = AdjustConfig(appToken, env)
@@ -104,8 +104,8 @@ class RSThirdPartyService {
       );
 
       // 获取配置值
-      maxFreeChatCount = _getConfigValue('Xj7bP3t', remoteConfig.getInt, 50);
-      showClothingCount = _getConfigValue('Tm4gW9n', remoteConfig.getInt, 5);
+      maxFreeChatCount = _getConfigValue('Bm7q2Xz', remoteConfig.getInt, 50);
+      showClothingCount = _getConfigValue('K1dR6fH', remoteConfig.getInt, 5);
       adConfig = remoteConfig.getString('ad_config');
       log.d('[fb] _refreshRemoteConfig ad_config: $adConfig');
     } catch (e) {

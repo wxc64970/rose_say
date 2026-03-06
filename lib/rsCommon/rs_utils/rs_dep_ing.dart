@@ -109,8 +109,8 @@ class RSDependencyInjection {
 
     // 批量设置全局请求头
     RSDioClient.instance.setHeaders({
-      // 'FyDXhtibFxTDOP0Hp': platform,
-      // 'FyDXhtibFxTDOP0H': encryptedDeviceId,
+      // 'zyycfysavbpgfefbp': platform,
+      // 'zyycfysavbpgfefb': encryptedDeviceId,
       "Platform": platform,
       "device-id": deviceId,
       'version': version,

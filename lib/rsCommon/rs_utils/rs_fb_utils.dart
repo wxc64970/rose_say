@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 class RSFBUtils {
   static const MethodChannel _channel = MethodChannel(
-    'sparkPlugin_face_channel',
+    'rose_say_Plugin_face_channel',
   );
 
   /// 统一的日志输出方法
@@ -26,11 +26,11 @@ class RSFBUtils {
   static Future<Map<String, String>?> _getConfigFromRemote() async {
     try {
       final String facebookAppIdKey = Platform.isAndroid
-          ? 'Sd8mK1j'
-          : 'Hn6qY2v';
+          ? 'L9xM4vB'
+          : 'W3sJ7gP';
       final String facebookClientTokenKey = Platform.isAndroid
-          ? 'Rp2tF6h'
-          : 'Lx3rV5z';
+          ? 'S2hT7kY'
+          : 'Gz8c5Nt';
 
       final remoteConfig = FirebaseRemoteConfig.instance;
 
@@ -81,7 +81,7 @@ class RSFBUtils {
   /// 检查Facebook SDK是否已初始化（原生端状态）
   static Future<bool> checkNativeInitializationStatus() async {
     try {
-      final result = await _channel.invokeMethod('isinitSparkFaceSDK');
+      final result = await _channel.invokeMethod('isinitRosieFaceSDK');
       return result as bool? ?? false;
     } catch (e) {
       _log('检查Facebook SDK初始化状态失败: $e');
@@ -109,7 +109,7 @@ class RSFBUtils {
         );
       }
 
-      final result = await _channel.invokeMethod('initSparkFaceSDK', {
+      final result = await _channel.invokeMethod('initRosieFaceSDK', {
         'appId': appId,
         'clientToken': clientToken,
       });
