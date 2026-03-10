@@ -13,9 +13,27 @@ class RschatPage extends StatefulWidget {
 }
 
 class _RschatPageState extends State<RschatPage>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, RouteAware {
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    RoutePages.observer.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  @override
+  void dispose() {
+    RoutePages.observer.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPopNext() {
+    // 当其它页面 pop 回到本页面时被调用
+    Get.find<RschatController>().refreshCurrentTabList();
+  }
 
   @override
   Widget build(BuildContext context) {
