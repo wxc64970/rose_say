@@ -237,7 +237,7 @@ class RSBodyWidget extends GetView<RsmessageController> {
               final vip = RS.login.vipStatus.value;
               if (controller.state.role.vip == true && !vip) {
                 DialogWidget.show(
-                  child: const Positioned.fill(child: RSUnLView()),
+                  child: const RSUnLView(),
                   clickMaskDismiss: false,
                 );
                 // return const Positioned.fill(child: RSUnLView());
