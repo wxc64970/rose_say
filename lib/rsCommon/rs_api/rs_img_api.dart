@@ -342,7 +342,8 @@ class ImageAPI {
   }
 
   // 生成头像结果
-  static Future<RSGenAvatarResult?> avatarAiGenerateResult(int id) async {
+  // static Future<RSGenAvatarResult?> avatarAiGenerateResult(int id) async {
+  static Future<RSBaseModel?> avatarAiGenerateResult(int id) async {
     try {
       log.d('Requesting avatar generation result for id: $id');
       Map<String, String> query = {"id": id.toString()};
@@ -353,9 +354,10 @@ class ImageAPI {
       log.d('API Response success: ${response.data}');
       var res = RSBaseModel.fromJson(
         response.data,
-        (json) => RSGenAvatarResult.fromJson(json),
+        null,
+        // (json) => RSGenAvatarResult.fromJson(json),
       );
-      return res.data;
+      return res;
     } catch (e) {
       log.e('avatarAiGenerateResult error: $e');
       return null;
