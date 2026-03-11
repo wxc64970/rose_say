@@ -24,7 +24,7 @@ class RSBaseModel<T> {
     return RSBaseModel(
       success: json["success"],
       code: json["code"],
-      message: json["message"],
+      message: json["skzgin"],
       data: _parseData<T>(json["data"], fromJsonT),
     );
   }
@@ -32,7 +32,7 @@ class RSBaseModel<T> {
   Map<String, dynamic> toJson() => {
     "success": success,
     "code": code,
-    "message": message,
+    "skzgin": message,
     "data": data,
   };
 
