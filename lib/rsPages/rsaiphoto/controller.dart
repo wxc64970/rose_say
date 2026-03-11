@@ -42,7 +42,6 @@ class RsaiphotoController extends GetxController {
   static const Duration _timeoutDuration = Duration(minutes: 2);
   RSGenAvatarResult? _cachedResult;
   bool _hasResult = false;
-  bool _isTimeoutHandled = false;
   int _currentStep = 0;
   int maxRetries = 40;
   final Duration _retryInterval = const Duration(seconds: 3);
@@ -181,10 +180,6 @@ class RsaiphotoController extends GetxController {
   }
 
   void _handleGenerationTimeout({String? errorMse}) {
-    if (_isTimeoutHandled) {
-      return;
-    }
-    _isTimeoutHandled = true;
     _timeoutTimer?.cancel();
     _progressTimer?.cancel();
     RSToast.show(errorMse ?? RSTextData.loadingTimeoutWithCreditRefund);
