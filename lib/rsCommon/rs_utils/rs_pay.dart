@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
@@ -489,6 +490,9 @@ class RSPayUtils {
     } else {
       await RS.login.fetchUserInfo();
       Get.back();
+      if (_vipFrom == VipFrom.viprole) {
+        SmartDialog.dismiss();
+      }
     }
   }
 
