@@ -81,9 +81,11 @@ class RSBodyWidget extends GetView<RsmeController> {
               ],
             ),
             SizedBox(height: 54.w),
-            RS.login.vipStatus.value
-                ? const RSVipWidget()
-                : const RSNonVipWidget(),
+            Obx(() {
+              return RS.login.vipStatus.value
+                  ? const RSVipWidget()
+                  : const RSNonVipWidget();
+            }),
             SizedBox(height: 40.w),
             Expanded(
               child: SingleChildScrollView(
