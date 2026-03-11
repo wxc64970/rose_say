@@ -80,7 +80,7 @@ class RSBodyWidget extends GetView<RsmessageController> {
                                 ),
                               ),
                               ConstrainedBox(
-                                constraints: BoxConstraints(maxWidth: 300.w),
+                                constraints: BoxConstraints(maxWidth: 260.w),
                                 child: Text(
                                   controller.state.role.name ?? '',
                                   overflow: TextOverflow.ellipsis,
