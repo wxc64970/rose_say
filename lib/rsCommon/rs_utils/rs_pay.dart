@@ -483,10 +483,11 @@ class RSPayUtils {
     }
   }
 
-  void _handleVipSuccess() {
+  void _handleVipSuccess() async {
     if (_vipFrom == VipFrom.dailyrd) {
       _dailyrdSubSuccess();
     } else {
+      await RS.login.fetchUserInfo();
       Get.back();
     }
   }
