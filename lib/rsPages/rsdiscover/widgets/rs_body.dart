@@ -82,7 +82,7 @@ class RSBodyWidget extends GetView<RsdiscoverController> {
               ),
               SizedBox(width: 24.w),
               Obx(() {
-                return RS.login.vipStatus.value
+                return !RS.login.vipStatus.value
                     ? InkWell(
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
