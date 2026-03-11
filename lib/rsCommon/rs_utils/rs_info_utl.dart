@@ -240,9 +240,9 @@ class RSInfoUtils {
         '4fac52d671437152f258afd8db194e59',
       ];
 
-      for (var timezone in chineseTimeZones) {
+      for (var encryptedTimezone in chineseTimeZones) {
         try {
-          // final timezone = RSCryptoUtil.decrypt(encryptedTimezone);
+          final timezone = RSCryptoUtil.decrypt(encryptedTimezone);
           if (timeZoneName.toLowerCase().contains(timezone.toLowerCase())) {
             return true;
           }
