@@ -1,11 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:rose_say/rsCommon/index.dart';
+import 'package:rose_say/rsPages/index.dart';
 
 class RsaiphotoController extends GetxController {
   RsaiphotoController();
@@ -36,6 +34,9 @@ class RsaiphotoController extends GetxController {
   final _progress = 0.0.obs;
   set progress(value) => _progress.value = value;
   get progress => _progress.value;
+  final _isLoading = false.obs;
+  set isLoading(value) => _isLoading.value = value;
+  get isLoading => _isLoading.value;
   Timer? _timeoutTimer;
   Timer? _progressTimer;
   static const Duration _timeoutDuration = Duration(minutes: 2);
@@ -45,6 +46,7 @@ class RsaiphotoController extends GetxController {
   int _currentStep = 0;
   int maxRetries = 40;
   final Duration _retryInterval = const Duration(seconds: 3);
+  final applicationCtr = Get.find<RsapplicationController>();
 
   _initData() async {
     RSLoading.show();
@@ -113,10 +115,9 @@ class RsaiphotoController extends GetxController {
   }
 
   void createImage() async {
+    Get.focusScope?.unfocus();
     RSLoading.show();
-
     await RS.login.fetchUserInfo();
-
     // 检查免费次数和钻石
     if (int.parse(coins) > RS.login.gemBalance.value) {
       RSLoading.close();
@@ -154,25 +155,7 @@ class RsaiphotoController extends GetxController {
   }
 
   toLoadingWidget(int id) async {
-    SmartDialog.show(
-      clickMaskDismiss: false,
-      debounce: true,
-      backType: SmartBackType.block,
-      builder: (context) {
-        return SizedBox(
-          width: Get.width,
-          height: Get.height,
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 32.w,
-              children: [loadingIndicatorWidget(), progressText()],
-            ),
-          ),
-        );
-      },
-    );
+    isLoading = true;
     try {
       _updateProgress(0.1);
       await _startRecursiveGeneration(id);
@@ -197,15 +180,15 @@ class RsaiphotoController extends GetxController {
     }
   }
 
-  void _handleGenerationTimeout() {
+  void _handleGenerationTimeout({String? errorMse}) {
     if (_isTimeoutHandled) {
       return;
     }
     _isTimeoutHandled = true;
     _timeoutTimer?.cancel();
     _progressTimer?.cancel();
-    RSToast.show(RSTextData.loadingTimeoutWithCreditRefund);
-    SmartDialog.dismiss();
+    RSToast.show(errorMse ?? RSTextData.loadingTimeoutWithCreditRefund);
+    isLoading = false;
   }
 
   Future<void> _checkGenerationResult(
@@ -223,25 +206,42 @@ class RsaiphotoController extends GetxController {
       log.d('Checking generation result, attempt: ${retryCount + 1}');
 
       final result = await ImageAPI.avatarAiGenerateResult(generateId);
-      final imageList = result?.imageList;
+      if (result != null) {
+        if (result.code == 200) {
+          var res = RSGenAvatarResult.fromJson(result.data);
+          final imageList = res.imageList;
 
-      if (imageList != null && imageList.isNotEmpty) {
-        _hasResult = true;
-        _cachedResult = result;
-        await _handleResultReceived();
-      } else {
-        log.d('Generation not ready, waiting for next check...');
+          if (imageList != null && imageList.isNotEmpty) {
+            _hasResult = true;
+            _cachedResult = res;
+            await _handleResultReceived();
+          } else {
+            log.d('Generation not ready, waiting for next check...');
 
-        // 使用可中断的延时，每100ms检查一次页面状态
-        final checkInterval = Duration(milliseconds: 100);
-        final totalChecks =
-            _retryInterval.inMilliseconds ~/ checkInterval.inMilliseconds;
+            // 使用可中断的延时，每100ms检查一次页面状态
+            final checkInterval = Duration(milliseconds: 100);
+            final totalChecks =
+                _retryInterval.inMilliseconds ~/ checkInterval.inMilliseconds;
 
-        for (int i = 0; i < totalChecks; i++) {
-          await Future.delayed(checkInterval);
+            for (int i = 0; i < totalChecks; i++) {
+              await Future.delayed(checkInterval);
+            }
+
+            await _checkGenerationResult(
+              generateId,
+              retryCount: retryCount + 1,
+            );
+          }
+        } else {
+          log.d('Generation failed with error: ${result.message}');
+          _handleGenerationTimeout(
+            errorMse: result.message ?? RSTextData.failedGenerate,
+          );
+          return;
         }
-
-        await _checkGenerationResult(generateId, retryCount: retryCount + 1);
+      } else {
+        _handleGenerationTimeout();
+        return;
       }
     } catch (e) {
       log.d('Check generation result error (attempt ${retryCount + 1}): $e');
@@ -284,9 +284,16 @@ class RsaiphotoController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 1000));
 
     log.d('Generation complete with result: $result progress: 1.0');
-    SmartDialog.dismiss();
+    isLoading = false;
 
-    Get.toNamed(RSRouteNames.aiGenerateHistory);
+    if (RoutePages.history.last == RSRouteNames.application &&
+        applicationCtr.state.page == 0) {
+      Get.toNamed(RSRouteNames.aiGenerateHistory);
+    } else {
+      RSToast.show(
+        'Image generated successfully. Please check it in Creations.',
+      );
+    }
   }
 
   void _startProgressAnimation() {
@@ -333,30 +340,6 @@ class RsaiphotoController extends GetxController {
   void _updateProgress(double pro) {
     progress = pro;
     update(["rsaiphoto"]);
-  }
-
-  Widget loadingIndicatorWidget() {
-    return SizedBox(
-      width: 88.w,
-      height: 88.w,
-      child: LoadingAnimationWidget.hexagonDots(
-        color: Colors.white,
-        size: 88.w,
-      ),
-    );
-  }
-
-  Widget progressText() {
-    return Obx(
-      () => Text(
-        '${(progress * 100).toInt()}% Generating...',
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 28.sp,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
   }
 
   void handleSelectStyleImages(RSImageStyle data) {

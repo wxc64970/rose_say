@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:rose_say/rsCommon/index.dart';
 
 import '../../index.dart';
@@ -14,211 +15,162 @@ class RSBodyWidget extends GetView<RsaiphotoController> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 32.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.asset(
-                "assets/images/rs_58.png",
-                width: 200.w,
-                fit: BoxFit.contain,
-              ),
-              Row(
-                spacing: 16.w,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(RSRouteNames.aiGenerateHistory);
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8.w,
-                        horizontal: 12.w,
-                      ),
-                      // margin: EdgeInsets.only(left: 24.w),
-                      decoration: BoxDecoration(
-                        color: const Color(0xffCCDEFF).withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(100.r),
-                        border: Border.all(
-                          width: 1.w,
-                          color: Colors.white.withValues(alpha: 0.23),
-                        ),
-                      ),
-                      child: Center(
-                        child: Row(
-                          children: [
-                            // Image.asset(
-                            //   "assets/images/rs_03.png",
-                            //   width: 48.w,
-                            //   fit: BoxFit.contain,
-                            // ),
-                            // SizedBox(width: 4.w),
-                            Text(
-                              RSTextData.creations,
-                              style: TextStyle(
-                                fontSize: 28.sp,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 32.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset(
+                      "assets/images/rs_58.png",
+                      width: 200.w,
+                      fit: BoxFit.contain,
+                    ),
+                    Row(
+                      spacing: 16.w,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(RSRouteNames.aiGenerateHistory);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 8.w,
+                              horizontal: 12.w,
+                            ),
+                            // margin: EdgeInsets.only(left: 24.w),
+                            decoration: BoxDecoration(
+                              color: const Color(
+                                0xffCCDEFF,
+                              ).withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(100.r),
+                              border: Border.all(
+                                width: 1.w,
+                                color: Colors.white.withValues(alpha: 0.23),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(
-                        RSRouteNames.gems,
-                        arguments: ConsumeFrom.generateimage,
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8.w,
-                        horizontal: 12.w,
-                      ),
-                      // margin: EdgeInsets.only(left: 24.w),
-                      decoration: BoxDecoration(
-                        color: const Color(0xffCCDEFF).withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(100.r),
-                        border: Border.all(
-                          width: 1.w,
-                          color: Colors.white.withValues(alpha: 0.23),
-                        ),
-                      ),
-                      child: Center(
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              "assets/images/rs_03.png",
-                              width: 48.w,
-                              fit: BoxFit.contain,
-                            ),
-                            SizedBox(width: 4.w),
-                            Obx(
-                              () => Text(
-                                RS.login.gemBalance.toString(),
-                                style: TextStyle(
-                                  fontSize: 28.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  // Image.asset(
+                                  //   "assets/images/rs_03.png",
+                                  //   width: 48.w,
+                                  //   fit: BoxFit.contain,
+                                  // ),
+                                  // SizedBox(width: 4.w),
+                                  Text(
+                                    RSTextData.creations,
+                                    style: TextStyle(
+                                      fontSize: 28.sp,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed(
+                              RSRouteNames.gems,
+                              arguments: ConsumeFrom.generateimage,
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 8.w,
+                              horizontal: 12.w,
+                            ),
+                            // margin: EdgeInsets.only(left: 24.w),
+                            decoration: BoxDecoration(
+                              color: const Color(
+                                0xffCCDEFF,
+                              ).withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.circular(100.r),
+                              border: Border.all(
+                                width: 1.w,
+                                color: Colors.white.withValues(alpha: 0.23),
+                              ),
+                            ),
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/rs_03.png",
+                                    width: 48.w,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  SizedBox(width: 4.w),
+                                  Obx(
+                                    () => Text(
+                                      RS.login.gemBalance.toString(),
+                                      style: TextStyle(
+                                        fontSize: 28.sp,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          SizedBox(height: 24.w),
-          Expanded(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.zero,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(24.w),
-                    margin: EdgeInsets.only(bottom: 24.w),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(22.r),
-                      color: const Color(0xff181B28),
-                    ),
+                  ],
+                ),
+                SizedBox(height: 24.w),
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.zero,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              spacing: 2,
-                              children: [
-                                Image.asset(
-                                  "assets/images/rs_39.png",
-                                  width: 30.w,
-                                  fit: BoxFit.contain,
-                                ),
-                                SizedBox(width: 12.w),
-                                Text(
-                                  RSTextData.description,
-                                  style: TextStyle(
-                                    fontSize: 28.sp,
-                                    color: Colors.white.withValues(alpha: 0.8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            GestureDetector(
-                              onTap: () => controller.clearDescription(),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 8.w,
-                                  horizontal: 12.w,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16.r),
-                                  color: const Color(0xff333B47),
-                                ),
-                                child: Row(
-                                  spacing: 8.w,
-                                  children: [
-                                    const Icon(
-                                      Icons.delete_outline,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      RSTextData.clear,
-                                      style: TextStyle(
-                                        fontSize: 24.sp,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 21.w),
                         Container(
+                          padding: EdgeInsets.all(24.w),
+                          margin: EdgeInsets.only(bottom: 24.w),
                           decoration: BoxDecoration(
-                            color: const Color(0xff333B47),
-                            borderRadius: BorderRadius.circular(16.r),
+                            borderRadius: BorderRadius.circular(22.r),
+                            color: const Color(0xff181B28),
                           ),
-                          padding: EdgeInsets.symmetric(horizontal: 24.w),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Obx(
-                                () => TextField(
-                                  controller: controller.descriptionController,
-                                  maxLength:
-                                      RseditmaskController.maxOtherInfoLength,
-                                  maxLines: 5,
-                                  minLines: 5,
-                                  cursorColor: Colors.white,
-                                  inputFormatters: [_NoLeadingSpaceFormatter()],
-                                  decoration: _buildInputDecoration(),
-                                  style: _buildTextStyle(),
-                                ),
-                              ),
-                              SizedBox(height: 16.w),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Row(
+                                    spacing: 2,
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/rs_39.png",
+                                        width: 30.w,
+                                        fit: BoxFit.contain,
+                                      ),
+                                      SizedBox(width: 12.w),
+                                      Text(
+                                        RSTextData.description,
+                                        style: TextStyle(
+                                          fontSize: 28.sp,
+                                          color: Colors.white.withValues(
+                                            alpha: 0.8,
+                                          ),
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                   GestureDetector(
-                                    onTap: () => controller.handleAIWrite(),
+                                    onTap: () => controller.clearDescription(),
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
                                         vertical: 8.w,
@@ -228,19 +180,17 @@ class RSBodyWidget extends GetView<RsaiphotoController> {
                                         borderRadius: BorderRadius.circular(
                                           16.r,
                                         ),
-                                        color: const Color(
-                                          0xffFFFFFF,
-                                        ).withValues(alpha: 0.2),
+                                        color: const Color(0xff333B47),
                                       ),
                                       child: Row(
                                         spacing: 8.w,
                                         children: [
                                           const Icon(
-                                            Icons.edit_note_outlined,
+                                            Icons.delete_outline,
                                             color: Colors.white,
                                           ),
                                           Text(
-                                            RSTextData.aiWrite,
+                                            RSTextData.clear,
                                             style: TextStyle(
                                               fontSize: 24.sp,
                                               color: Colors.white,
@@ -250,233 +200,353 @@ class RSBodyWidget extends GetView<RsaiphotoController> {
                                       ),
                                     ),
                                   ),
-                                  Obx(
-                                    () => Text(
-                                      '${controller.descriptionLength.value}/${controller.maxDescriptionLength}',
-                                      style: TextStyle(
-                                        fontSize: 24.sp,
-                                        color: Colors.white,
+                                ],
+                              ),
+                              SizedBox(height: 21.w),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: const Color(0xff333B47),
+                                  borderRadius: BorderRadius.circular(16.r),
+                                ),
+                                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Obx(
+                                      () => TextField(
+                                        controller:
+                                            controller.descriptionController,
+                                        maxLength: RseditmaskController
+                                            .maxOtherInfoLength,
+                                        maxLines: 5,
+                                        minLines: 5,
+                                        cursorColor: Colors.white,
+                                        inputFormatters: [
+                                          _NoLeadingSpaceFormatter(),
+                                        ],
+                                        decoration: _buildInputDecoration(),
+                                        style: _buildTextStyle(),
                                       ),
+                                    ),
+                                    SizedBox(height: 16.w),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () =>
+                                              controller.handleAIWrite(),
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: 8.w,
+                                              horizontal: 12.w,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(16.r),
+                                              color: const Color(
+                                                0xffFFFFFF,
+                                              ).withValues(alpha: 0.2),
+                                            ),
+                                            child: Row(
+                                              spacing: 8.w,
+                                              children: [
+                                                const Icon(
+                                                  Icons.edit_note_outlined,
+                                                  color: Colors.white,
+                                                ),
+                                                Text(
+                                                  RSTextData.aiWrite,
+                                                  style: TextStyle(
+                                                    fontSize: 24.sp,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Obx(
+                                          () => Text(
+                                            '${controller.descriptionLength.value}/${controller.maxDescriptionLength}',
+                                            style: TextStyle(
+                                              fontSize: 24.sp,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 16.w),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(24.w),
+                          margin: EdgeInsets.only(bottom: 24.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24.r),
+                            color: const Color(0xff181B28),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    spacing: 2,
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/rs_39.png",
+                                        width: 30.w,
+                                        fit: BoxFit.contain,
+                                      ),
+                                      SizedBox(width: 12.w),
+                                      Text(
+                                        RSTextData.imageStyle,
+                                        style: TextStyle(
+                                          fontSize: 28.sp,
+                                          color: Colors.white.withValues(
+                                            alpha: 0.8,
+                                          ),
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    width: (120 * 2).w,
+                                    height: 40.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      color: const Color(0xff333B47),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        _buildImagesStyleOption(
+                                          RSTextData.real,
+                                        ),
+                                        _buildImagesStyleOption(
+                                          RSTextData.fantasy,
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 16.w),
+                              SizedBox(height: 21.w),
+                              Obx(
+                                () => SizedBox(
+                                  width: Get.width,
+                                  height: 168.w,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: controller.imageStyleData.length,
+                                    padding: EdgeInsets.zero,
+                                    itemBuilder: (context, index) {
+                                      return imageStyleItem(
+                                        data: controller.imageStyleData[index],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(24.w),
+                          margin: EdgeInsets.only(bottom: 24.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24.r),
+                            color: const Color(0xff181B28),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    spacing: 2,
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/rs_39.png",
+                                        width: 30.w,
+                                        fit: BoxFit.contain,
+                                      ),
+                                      SizedBox(width: 12.w),
+                                      Text(
+                                        RSTextData.numberofimages,
+                                        style: TextStyle(
+                                          fontSize: 28.sp,
+                                          color: Colors.white.withValues(
+                                            alpha: 0.8,
+                                          ),
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    width: (100 * 2).w,
+                                    height: 40.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.r),
+                                      color: const Color(0xff333B47),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        _buildMinusWidget(),
+                                        Obx(
+                                          () => Text(
+                                            controller.numberOfImages
+                                                .toString(),
+                                            style: TextStyle(
+                                              fontSize: 28.sp,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        _buildPlusWidget(),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(24.w),
+                          margin: EdgeInsets.only(bottom: 24.w),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24.r),
+                            color: const Color(0xff181B28),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    spacing: 2,
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/rs_39.png",
+                                        width: 30.w,
+                                        fit: BoxFit.contain,
+                                      ),
+                                      SizedBox(width: 12.w),
+                                      Text(
+                                        RSTextData.imageRatio,
+                                        style: TextStyle(
+                                          fontSize: 28.sp,
+                                          color: Colors.white.withValues(
+                                            alpha: 0.8,
+                                          ),
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 21.w),
+                              _buildImageRatioWidget(),
                             ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(24.w),
-                    margin: EdgeInsets.only(bottom: 24.w),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24.r),
-                      color: const Color(0xff181B28),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              spacing: 2,
-                              children: [
-                                Image.asset(
-                                  "assets/images/rs_39.png",
-                                  width: 30.w,
-                                  fit: BoxFit.contain,
-                                ),
-                                SizedBox(width: 12.w),
-                                Text(
-                                  RSTextData.imageStyle,
-                                  style: TextStyle(
-                                    fontSize: 28.sp,
-                                    color: Colors.white.withValues(alpha: 0.8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              width: (120 * 2).w,
-                              height: 40.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.r),
-                                color: const Color(0xff333B47),
-                              ),
-                              child: Row(
-                                children: [
-                                  _buildImagesStyleOption(RSTextData.real),
-                                  _buildImagesStyleOption(RSTextData.fantasy),
-                                ],
-                              ),
-                            ),
-                          ],
+                ),
+                ButtonGradientWidget(
+                  onTap: controller.createImage,
+                  height: 100,
+                  borderRadius: BorderRadius.circular(100.r),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        RSTextData.create,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 32.sp,
+                          fontWeight: FontWeight.w600,
                         ),
-                        SizedBox(height: 21.w),
-                        Obx(
-                          () => SizedBox(
-                            width: Get.width,
-                            height: 168.w,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: controller.imageStyleData.length,
-                              padding: EdgeInsets.zero,
-                              itemBuilder: (context, index) {
-                                return imageStyleItem(
-                                  data: controller.imageStyleData[index],
-                                );
-                              },
-                            ),
+                      ),
+                      SizedBox(width: 16.w),
+                      Image.asset(
+                        "assets/images/rs_03.png",
+                        width: 32.w,
+                        fit: BoxFit.contain,
+                      ),
+                      Obx(
+                        () => Text(
+                          controller.coins,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 32.sp,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(24.w),
-                    margin: EdgeInsets.only(bottom: 24.w),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24.r),
-                      color: const Color(0xff181B28),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              spacing: 2,
-                              children: [
-                                Image.asset(
-                                  "assets/images/rs_39.png",
-                                  width: 30.w,
-                                  fit: BoxFit.contain,
-                                ),
-                                SizedBox(width: 12.w),
-                                Text(
-                                  RSTextData.numberofimages,
-                                  style: TextStyle(
-                                    fontSize: 28.sp,
-                                    color: Colors.white.withValues(alpha: 0.8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              width: (100 * 2).w,
-                              height: 40.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.r),
-                                color: const Color(0xff333B47),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  _buildMinusWidget(),
-                                  Obx(
-                                    () => Text(
-                                      controller.numberOfImages.toString(),
-                                      style: TextStyle(
-                                        fontSize: 28.sp,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  _buildPlusWidget(),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(24.w),
-                    margin: EdgeInsets.only(bottom: 24.w),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24.r),
-                      color: const Color(0xff181B28),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              spacing: 2,
-                              children: [
-                                Image.asset(
-                                  "assets/images/rs_39.png",
-                                  width: 30.w,
-                                  fit: BoxFit.contain,
-                                ),
-                                SizedBox(width: 12.w),
-                                Text(
-                                  RSTextData.imageRatio,
-                                  style: TextStyle(
-                                    fontSize: 28.sp,
-                                    color: Colors.white.withValues(alpha: 0.8),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 21.w),
-                        _buildImageRatioWidget(),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          ButtonGradientWidget(
-            onTap: controller.createImage,
-            height: 100,
-            borderRadius: BorderRadius.circular(100.r),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  RSTextData.create,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 32.sp,
-                    fontWeight: FontWeight.w600,
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(width: 16.w),
-                Image.asset(
-                  "assets/images/rs_03.png",
-                  width: 32.w,
-                  fit: BoxFit.contain,
-                ),
-                Obx(
-                  () => Text(
-                    controller.coins,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 32.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
+                SizedBox(height: Get.mediaQuery.padding.bottom),
               ],
             ),
           ),
-          SizedBox(height: Get.mediaQuery.padding.bottom),
-        ],
+        ),
+        Obx(() {
+          return controller.isLoading
+              ? Container(
+                  width: Get.width,
+                  height: Get.height,
+                  color: Colors.black.withValues(alpha: 0.8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [loadingIndicatorWidget(), progressText()],
+                  ),
+                )
+              : const SizedBox.shrink();
+        }),
+      ],
+    );
+  }
+
+  Widget loadingIndicatorWidget() {
+    return SizedBox(
+      width: 88.w,
+      height: 88.w,
+      child: LoadingAnimationWidget.hexagonDots(
+        color: Colors.white,
+        size: 88.w,
+      ),
+    );
+  }
+
+  Widget progressText() {
+    return Obx(
+      () => Text(
+        '${(controller.progress * 100).toInt()}% Generating...',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 28.sp,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
