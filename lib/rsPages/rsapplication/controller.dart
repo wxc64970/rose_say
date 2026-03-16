@@ -55,21 +55,7 @@ class RsapplicationController extends GetxController
     super.onInit();
     // 注册监听器
     WidgetsBinding.instance.addObserver(this);
-
     bottomTabs = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: Image.asset(
-          "assets/tabbar/rs_aiphoto_inactive.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        activeIcon: Image.asset(
-          "assets/tabbar/rs_aiphoto_active.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        label: 'AI Photo',
-      ),
       BottomNavigationBarItem(
         icon: Image.asset(
           "assets/tabbar/rs_home_inactive.png",
@@ -83,7 +69,19 @@ class RsapplicationController extends GetxController
         ),
         label: 'Home',
       ),
-
+      BottomNavigationBarItem(
+        icon: Image.asset(
+          "assets/tabbar/rs_aiphoto_inactive.png",
+          width: 48.w,
+          fit: BoxFit.contain,
+        ),
+        activeIcon: Image.asset(
+          "assets/tabbar/rs_aiphoto_active.png",
+          width: 48.w,
+          fit: BoxFit.contain,
+        ),
+        label: 'AI Photo',
+      ),
       BottomNavigationBarItem(
         icon: Image.asset(
           "assets/tabbar/rs_chat_inactive.png",
