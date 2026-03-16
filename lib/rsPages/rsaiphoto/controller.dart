@@ -282,7 +282,7 @@ class RsaiphotoController extends GetxController {
     isLoading = false;
 
     if (RoutePages.history.last == RSRouteNames.application &&
-        applicationCtr.state.page == 0) {
+        applicationCtr.state.page == 1) {
       Get.toNamed(RSRouteNames.aiGenerateHistory);
     } else {
       RSToast.show(
