@@ -4,7 +4,9 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:rose_say/rsCommon/index.dart';
+import 'package:rose_say/rsPages/ad/rs_my_ad.dart';
 
 import '../../index.dart';
 
@@ -18,50 +20,73 @@ class BuildDiscoveryList extends GetView<RsdiscoverController> {
       children: [
         Stack(
           children: [
-            TabBar(
-              controller: controller.tabController,
-              isScrollable: true, // 关闭均分宽度，支持滑动
-              tabAlignment: TabAlignment.start,
-              labelColor: const Color(0xffABC4E4),
-              unselectedLabelColor: Colors.white.withValues(alpha: 0.8),
-              dividerHeight: 0.0,
-              indicatorSize: TabBarIndicatorSize.label, // 下划线宽度与文字一致
-              indicator: const BoxDecoration(
-                image: DecorationImage(
-                  alignment: Alignment.centerRight,
-                  image: AssetImage("assets/images/rs_01.png"),
-                ),
-              ),
-              padding: EdgeInsets.zero,
-              labelPadding: EdgeInsets.only(right: 54.w), // Tab 之间的间距
-              unselectedLabelStyle: TextStyle(
-                fontSize: 28.sp,
-                fontWeight: FontWeight.w400,
-              ), // 未选中文字样式
-              labelStyle: TextStyle(
-                fontSize: 28.sp,
-                fontWeight: FontWeight.w600,
-              ), // 选中文字样式
-              tabs: List.generate(controller.categroyList.length, (index) {
-                final data = controller.categroyList[index];
-
-                return SizedBox(
-                  height: 48.w,
-                  child: Stack(
-                    children: [
-                      Text(
-                        '${data.title}   ',
-                        style: TextStyle(
-                          fontSize: 28.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.transparent,
+            Row(
+              spacing: 20.w,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 10.w),
+                    child: TabBar(
+                      controller: controller.tabController,
+                      isScrollable: true, // 关闭均分宽度，支持滑动
+                      tabAlignment: TabAlignment.start,
+                      labelColor: const Color(0xffABC4E4),
+                      unselectedLabelColor: Colors.white.withValues(alpha: 0.8),
+                      dividerHeight: 0.0,
+                      indicatorSize: TabBarIndicatorSize.label, // 下划线宽度与文字一致
+                      indicator: const BoxDecoration(
+                        image: DecorationImage(
+                          alignment: Alignment.centerRight,
+                          image: AssetImage("assets/images/rs_01.png"),
                         ),
                       ),
-                      Text('${data.title}   '),
-                    ],
+                      padding: EdgeInsets.zero,
+                      labelPadding: EdgeInsets.only(right: 54.w), // Tab 之间的间距
+                      unselectedLabelStyle: TextStyle(
+                        fontSize: 28.sp,
+                        fontWeight: FontWeight.w400,
+                      ), // 未选中文字样式
+                      labelStyle: TextStyle(
+                        fontSize: 28.sp,
+                        fontWeight: FontWeight.w600,
+                      ), // 选中文字样式
+                      tabs: List.generate(controller.categroyList.length, (
+                        index,
+                      ) {
+                        final data = controller.categroyList[index];
+
+                        return SizedBox(
+                          height: 48.w,
+                          child: Stack(
+                            children: [
+                              Text(
+                                '${data.title}   ',
+                                style: TextStyle(
+                                  fontSize: 28.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                              Text('${data.title}   '),
+                            ],
+                          ),
+                        );
+                      }),
+                    ),
                   ),
-                );
-              }),
+                ),
+                if (RS.storage.isRSB)
+                  GestureDetector(
+                    onTap: () {
+                      controller.handleFilter();
+                    },
+                    child: Image.asset(
+                      "assets/images/rs_filter.png",
+                      width: 64.w,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+              ],
             ),
           ],
         ),
@@ -114,21 +139,68 @@ class BuildDiscoveryList extends GetView<RsdiscoverController> {
     List<ChaterModel> list,
     int tabIndex,
   ) {
+    // 只在all分类下显示广告
+    controller.nativeAd ??= MyAd().nativeAd;
+    final bool showAd =
+        tabIndex == HomeListCategroy.all.index &&
+        controller.nativeAd !=
+            null //
+            &&
+        RS.login.vipStatus.value == false;
+    final itemCount = showAd ? list.length + 1 : list.length;
     return GridView.builder(
       key: PageStorageKey("tab_$tabIndex"),
       physics: physics,
-      itemCount: list.length,
+      itemCount: itemCount,
       padding: EdgeInsets.zero,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2, // 固定 2 列
         crossAxisSpacing: 22.w, // 列之间的间距
         mainAxisSpacing: 24.w, // 行之间的间距
-        childAspectRatio: 332.w / 392.w, // 子项宽高比（宽/高），控制网格项形状
+        childAspectRatio: RS.storage.isRSB
+            ? 332.w / 438.w
+            : 332.w / 392.w, // 子项宽高比（宽/高），控制网格项形状
       ),
       itemBuilder: (context, index) {
-        final data = list[index];
-        // final displayTags = data.buildDisplayTags();
-        // final shouldShowTags = displayTags.isNotEmpty && RS.storage.isRSB;
+        final int realIndex = showAd && index > 2 ? index - 1 : index;
+        if (showAd && index == 2) {
+          if (controller.nativeAd != null) {
+            return Container(
+              constraints: const BoxConstraints(
+                minWidth: 320, // minimum recommended width
+                minHeight: 320, // minimum recommended height
+                maxWidth: 400,
+                maxHeight: 400,
+              ),
+              child: Stack(
+                children: [
+                  Material(
+                    elevation: 0,
+                    child: AdWidget(ad: controller.nativeAd!),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.r),
+                      color: RSAppColors.primaryColor,
+                    ),
+                    child: Text(
+                      'Ad',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        }
+        final data = list[realIndex];
+        final displayTags = data.buildDisplayTags();
+        final shouldShowTags = displayTags.isNotEmpty && RS.storage.isRSB;
         return InkWell(
           onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
@@ -142,7 +214,7 @@ class BuildDiscoveryList extends GetView<RsdiscoverController> {
           },
           child: GradientBorderWidget(
             width: 332.w, // 控件宽度
-            height: 392.w, // 控件高度
+            height: RS.storage.isRSB ? 438.w : 392.w, // 控件高度
             borderWidth: data.vip == true ? 8 : 1.4, // 边框物理像素宽度
             // 渐变颜色（按你要求的色标配置）
             gradientColors: data.vip == true
@@ -174,58 +246,58 @@ class BuildDiscoveryList extends GetView<RsdiscoverController> {
                       ),
                       shape: BoxShape.rectangle,
                     ),
-                    Positioned(
-                      left: 0,
-                      top: 32.w,
-                      child: InkWell(
-                        onTap: () {
-                          controller.onCollect(tabIndex, index, data);
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(40.r),
-                            bottomRight: Radius.circular(40.r),
-                          ),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(
-                              sigmaX: 20.w, // 水平模糊度（对应 blur 10px）
-                              sigmaY: 20.w, // 垂直模糊度（对应 blur 10px）
-                            ),
-                            // 关键2：实现 box-shadow + 背景半透（需嵌套 Container）
-                            child: Container(
-                              padding: EdgeInsets.all(8.w),
-                              decoration: BoxDecoration(
-                                color: Colors.black26,
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(40.r),
-                                  bottomRight: Radius.circular(40.r),
-                                ),
-                              ),
-                              child: Row(
-                                spacing: 14.w,
-                                children: [
-                                  Image.asset(
-                                    data.collect!
-                                        ? "assets/images/rs_collected.png"
-                                        : "assets/images/rs_collect.png",
-                                    width: 40.w,
-                                    fit: BoxFit.contain,
-                                  ),
-                                  Text(
-                                    data.likes.toString(),
-                                    style: TextStyle(
-                                      fontSize: 20.sp,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(width: 8.w),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Positioned(
+                    //   left: 0,
+                    //   top: 32.w,
+                    //   child: InkWell(
+                    //     onTap: () {
+                    //       controller.onCollect(tabIndex, index, data);
+                    //     },
+                    //     child: ClipRRect(
+                    //       borderRadius: BorderRadius.only(
+                    //         topRight: Radius.circular(40.r),
+                    //         bottomRight: Radius.circular(40.r),
+                    //       ),
+                    //       child: BackdropFilter(
+                    //         filter: ImageFilter.blur(
+                    //           sigmaX: 20.w, // 水平模糊度（对应 blur 10px）
+                    //           sigmaY: 20.w, // 垂直模糊度（对应 blur 10px）
+                    //         ),
+                    //         // 关键2：实现 box-shadow + 背景半透（需嵌套 Container）
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(8.w),
+                    //           decoration: BoxDecoration(
+                    //             color: Colors.black26,
+                    //             borderRadius: BorderRadius.only(
+                    //               topRight: Radius.circular(40.r),
+                    //               bottomRight: Radius.circular(40.r),
+                    //             ),
+                    //           ),
+                    //           child: Row(
+                    //             spacing: 14.w,
+                    //             children: [
+                    //               Image.asset(
+                    //                 data.collect!
+                    //                     ? "assets/images/rs_collected.png"
+                    //                     : "assets/images/rs_collect.png",
+                    //                 width: 40.w,
+                    //                 fit: BoxFit.contain,
+                    //               ),
+                    //               Text(
+                    //                 data.likes.toString(),
+                    //                 style: TextStyle(
+                    //                   fontSize: 20.sp,
+                    //                   color: Colors.white,
+                    //                 ),
+                    //               ),
+                    //               SizedBox(width: 8.w),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 Container(
@@ -264,6 +336,11 @@ class BuildDiscoveryList extends GetView<RsdiscoverController> {
                         ],
                       ),
                       SizedBox(height: 8.w),
+                      if (shouldShowTags) ...[
+                        SizedBox(height: 8.w),
+                        _buildTags(displayTags),
+                      ],
+                      SizedBox(height: 8.w),
                       Text(
                         data.aboutMe ?? "",
                         style: TextStyle(
@@ -281,6 +358,39 @@ class BuildDiscoveryList extends GetView<RsdiscoverController> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildTags(List<String> displayTags) {
+    return SizedBox(
+      width: 304.w,
+      height: 38.w,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: displayTags.length,
+        itemBuilder: (context, i) {
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 4.w, horizontal: 16.w),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  const Color(0xffFFFFFF).withValues(alpha: 0.1),
+                  const Color(0xffFFFFFF).withValues(alpha: 0.02),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(40.r),
+            ),
+            child: Text(
+              displayTags[i],
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w400,
+                color: Colors.white.withValues(alpha: 0.8),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

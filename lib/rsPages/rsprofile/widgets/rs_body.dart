@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:rose_say/rsCommon/index.dart';
 import 'package:rose_say/rsPages/rsdiscover/widgets/rs_discover_list.dart';
+import 'package:rose_say/rsPages/rsmessage/widgets/widgets.dart';
 
 import '../index.dart';
 
@@ -289,6 +290,173 @@ class RSBodyWidget extends GetView<RsprofileController> {
                               color: const Color(0xff617085),
                             ),
                           ),
+                          if (RS.storage.isRSB) ...[
+                            SizedBox(height: 24.w),
+                            controller.role.tags == null ||
+                                    controller.role.tags!.isEmpty
+                                ? const SizedBox()
+                                : Container(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 24.w,
+                                      horizontal: 16.w,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(22.r),
+                                      color: const Color(0xff181B28),
+                                    ),
+                                    child: Column(
+                                      spacing: 20.w,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          spacing: 12.w,
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/rs_39.png",
+                                              width: 30.w,
+                                              fit: BoxFit.contain,
+                                            ),
+                                            Text(
+                                              RSTextData.tagsTitle,
+                                              style: TextStyle(
+                                                fontSize: 28.sp,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: Get.width,
+                                          height: 44.w,
+                                          child: ListView.builder(
+                                            itemCount:
+                                                controller.role.tags!.length,
+                                            scrollDirection: Axis.horizontal,
+                                            itemBuilder: (context, index) {
+                                              var tag =
+                                                  controller.role.tags![index];
+                                              return Container(
+                                                height: 44.w,
+                                                margin: EdgeInsets.only(
+                                                  right: 16.w,
+                                                ),
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal: 12.w,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        40.r,
+                                                      ),
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      Colors.white.withValues(
+                                                        alpha: 0.1,
+                                                      ),
+                                                      Colors.white.withValues(
+                                                        alpha: 0.02,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    tag,
+                                                    style: TextStyle(
+                                                      fontSize: 24.sp,
+                                                      color: Colors.white
+                                                          .withValues(
+                                                            alpha: 0.8,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                            Obx(() {
+                              final images = controller.images;
+                              if (images.isEmpty) {
+                                return const SizedBox();
+                              }
+                              final imageCount = images.length;
+                              return Container(
+                                margin: EdgeInsets.only(top: 18.w),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 24.w,
+                                  horizontal: 16.w,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(22.r),
+                                  color: const Color(0xff181B28),
+                                ),
+                                child: Column(
+                                  spacing: 20.w,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      spacing: 12.w,
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/rs_39.png",
+                                          width: 30.w,
+                                          fit: BoxFit.contain,
+                                        ),
+                                        Text(
+                                          RSTextData.ai_photos,
+                                          style: TextStyle(
+                                            fontSize: 28.sp,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: Get.width,
+                                      height: 160.w,
+                                      child: ListView.separated(
+                                        padding: EdgeInsets.zero,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (_, idx) {
+                                          final image = images[idx];
+                                          final unlocked =
+                                              image.unlocked ?? false;
+                                          return PhotoAlbumItem(
+                                            imageHeight: 160.w,
+                                            image: image,
+                                            avatar: controller.role.avatar,
+                                            unlocked: unlocked,
+                                            onTap: () {
+                                              if (unlocked) {
+                                                controller.msgCtr.onTapImage(
+                                                  image,
+                                                );
+                                              } else {
+                                                controller.msgCtr
+                                                    .onTapUnlockImage(image);
+                                              }
+                                            },
+                                          );
+                                        },
+                                        itemCount: imageCount,
+                                        separatorBuilder: (_, idx) {
+                                          return SizedBox(width: 16.w);
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
+                          ],
                         ],
                       ),
                     ),

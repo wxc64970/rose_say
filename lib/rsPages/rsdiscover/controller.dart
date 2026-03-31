@@ -1,9 +1,15 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:rose_say/rsCommon/index.dart';
+import 'package:rose_say/rsPages/ad/rs_ad_type.dart';
+import 'package:rose_say/rsPages/ad/rs_my_ad.dart';
 
 import 'rs_auto_call_controller.dart';
+import 'widgets/rs_filter_widget.dart';
 
 enum HomeListCategroy { all, realistic, anime, dressUp, video }
 
@@ -53,7 +59,7 @@ class RsdiscoverController extends GetxController
 
   Rx<EmptyType?> type = Rx<EmptyType?>(null);
 
-  bool isNoMoreData = false;
+  List<bool> isNoMoreData = [];
 
   // 标签
   List<RSTagsModel> roleTags = [];
@@ -77,13 +83,38 @@ class RsdiscoverController extends GetxController
   //筛选
   Rx<RSTagsModel?> selectedType = RSTagsModel().obs;
 
+  NativeAd? nativeAd;
+
   @override
   void onInit() {
     super.onInit();
     // 初始化标签数据
     _initData();
+    //加载广告
+    _loadAd();
     Get.put(RSAutoCallController());
     WidgetsBinding.instance.addPostFrameCallback((_) {});
+    ever(RS.login.vipStatus, (_) {
+      if (RS.login.vipStatus.value) {
+        nativeAd?.dispose();
+        nativeAd = null;
+        update();
+      }
+    });
+  }
+
+  Future<void> _loadAd() async {
+    try {
+      final success = await MyAd().loadNativeAd(
+        placement: PlacementType.homelist,
+      );
+      if (success) {
+        nativeAd = MyAd().nativeAd;
+        update();
+      }
+    } catch (e) {
+      log.e('[ad] native load error: $e');
+    }
   }
 
   // 初始化标签数据
@@ -150,6 +181,7 @@ class RsdiscoverController extends GetxController
         isDataLoaded.add(false.obs);
         isLoading.add(false.obs);
         list.add(<ChaterModel>[].obs);
+        isNoMoreData.add(false);
       }
       RSLoading.show();
       onRefresh(0);
@@ -188,13 +220,13 @@ class RsdiscoverController extends GetxController
   Future<void> onRefresh(index) async {
     try {
       page = 1;
-      isNoMoreData = false;
+      isNoMoreData[index] = false;
       await _fetchData(index);
 
       await Future.delayed(const Duration(milliseconds: 50));
       refreshCtr.finishRefresh();
       refreshCtr.finishLoad(
-        isNoMoreData ? IndicatorResult.noMore : IndicatorResult.none,
+        isNoMoreData[index] ? IndicatorResult.noMore : IndicatorResult.none,
       );
     } finally {
       if (index == 0) {
@@ -207,8 +239,10 @@ class RsdiscoverController extends GetxController
 
   Future<void> onLoad(index) async {
     if (isLoading[index].value) return;
-    if (isNoMoreData) {
-      refreshCtr.finishLoad(IndicatorResult.noMore);
+    if (isNoMoreData[index]) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        refreshCtr.finishLoad(IndicatorResult.noMore);
+      });
       return;
     }
 
@@ -220,7 +254,7 @@ class RsdiscoverController extends GetxController
 
       await Future.delayed(const Duration(milliseconds: 50));
       refreshCtr.finishLoad(
-        isNoMoreData ? IndicatorResult.noMore : IndicatorResult.none,
+        isNoMoreData[index] ? IndicatorResult.noMore : IndicatorResult.none,
       );
     } catch (e) {
       page--;
@@ -291,6 +325,28 @@ class RsdiscoverController extends GetxController
         }
       }
     }
+  }
+
+  handleFilter() async {
+    if (roleTags.isEmpty) {
+      RSLoading.show();
+      await loadTags();
+      selectedType.value = roleTags.firstOrNull;
+      RSLoading.close();
+    }
+    selectTags.assignAll(cjSelectTags);
+    DialogWidget.show(child: RSFilterWidget(), clickMaskDismiss: false);
+  }
+
+  handleFilterSubmit() {
+    SmartDialog.dismiss();
+    cjSelectTags.assignAll(selectTags);
+    filterEvent.value = (
+      Set<TagModel>.from(cjSelectTags),
+      DateTime.now().millisecondsSinceEpoch,
+    );
+    filterEvent.refresh();
+    update();
   }
 
   Future<void> recordInstallTime() async {
@@ -396,7 +452,7 @@ class RsdiscoverController extends GetxController
       );
 
       final records = res?.records ?? [];
-      isNoMoreData = (records.length) < size;
+      isNoMoreData[index] = (records.length) < size;
 
       if (page == 1) {
         list[index].clear();
@@ -404,6 +460,7 @@ class RsdiscoverController extends GetxController
           Get.find<RSAutoCallController>().onCall(records);
         }
       }
+      nativeAd ??= MyAd().nativeAd;
 
       type.value = list[index].isEmpty ? EmptyType.noData : null;
       list[index].addAll(records);

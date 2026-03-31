@@ -106,7 +106,7 @@ class RSThirdPartyService {
       // 获取配置值
       maxFreeChatCount = _getConfigValue('Bm7q2Xz', remoteConfig.getInt, 50);
       showClothingCount = _getConfigValue('K1dR6fH', remoteConfig.getInt, 5);
-      adConfig = remoteConfig.getString('ad_config');
+      adConfig = remoteConfig.getString('P5jQ8dF');
       log.d('[fb] _refreshRemoteConfig ad_config: $adConfig');
     } catch (e) {
       // 网络错误或其他错误，使用默认值

@@ -3,10 +3,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:rose_say/rsCommon/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // 广告初始化
+  try {
+    MobileAds.instance.initialize();
+
+    MobileAds.instance.updateRequestConfiguration(RequestConfiguration());
+  } catch (e) {
+    print(e.toString());
+  }
 
   // 只允许竖屏
   SystemChrome.setPreferredOrientations([

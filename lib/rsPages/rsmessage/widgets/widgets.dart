@@ -19,3 +19,4 @@ export 'rs_tip_item.dart';
 export 'rs_typ_t_item.dart';
 export 'rs_un_l_widget.dart';
 export 'rs_v_item.dart';
+export 'rs_img_album.dart';
