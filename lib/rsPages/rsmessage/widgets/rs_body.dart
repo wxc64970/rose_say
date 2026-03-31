@@ -186,67 +186,60 @@ class RSBodyWidget extends GetView<RsmessageController> {
                                 ),
                               ),
                             ),
-                            if (RS.storage.isRSB)
-                              GestureDetector(
-                                onTap: () {
-                                  RSlogEvent('c_call');
-                                  if (!RS.login.vipStatus.value) {
-                                    Get.toNamed(
-                                      RSRouteNames.vip,
-                                      arguments: VipFrom.call,
-                                    );
-                                    return;
-                                  }
-
-                                  if (!RS.login.checkBalance(
-                                    ConsumeFrom.call,
-                                  )) {
-                                    Get.toNamed(
-                                      RSRouteNames.gems,
-                                      arguments: ConsumeFrom.call,
-                                    );
-                                    return;
-                                  }
-
-                                  final sessionId = controller.state.sessionId;
-                                  if (sessionId == null) {
-                                    RSToast.show(
-                                      'Please select a user to call.',
-                                    );
-                                    return;
-                                  }
-
-                                  RoutePages.pushPhone(
-                                    sessionId: sessionId,
-                                    role: controller.state.role,
-                                    showVideo: false,
+                            GestureDetector(
+                              onTap: () {
+                                RSlogEvent('c_call');
+                                if (!RS.login.vipStatus.value) {
+                                  Get.toNamed(
+                                    RSRouteNames.vip,
+                                    arguments: VipFrom.call,
                                   );
-                                },
-                                child: Container(
-                                  width: 64.w,
-                                  height: 64.w,
-                                  // margin: EdgeInsets.only(left: 24.w),
-                                  decoration: BoxDecoration(
-                                    color: const Color(
-                                      0xffCCDEFF,
-                                    ).withValues(alpha: 0.1),
-                                    borderRadius: BorderRadius.circular(100.r),
-                                    border: Border.all(
-                                      width: 1.w,
-                                      color: Colors.white.withValues(
-                                        alpha: 0.23,
-                                      ),
-                                    ),
+                                  return;
+                                }
+
+                                if (!RS.login.checkBalance(ConsumeFrom.call)) {
+                                  Get.toNamed(
+                                    RSRouteNames.gems,
+                                    arguments: ConsumeFrom.call,
+                                  );
+                                  return;
+                                }
+
+                                final sessionId = controller.state.sessionId;
+                                if (sessionId == null) {
+                                  RSToast.show('Please select a user to call.');
+                                  return;
+                                }
+
+                                RoutePages.pushPhone(
+                                  sessionId: sessionId,
+                                  role: controller.state.role,
+                                  showVideo: false,
+                                );
+                              },
+                              child: Container(
+                                width: 64.w,
+                                height: 64.w,
+                                // margin: EdgeInsets.only(left: 24.w),
+                                decoration: BoxDecoration(
+                                  color: const Color(
+                                    0xffCCDEFF,
+                                  ).withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(100.r),
+                                  border: Border.all(
+                                    width: 1.w,
+                                    color: Colors.white.withValues(alpha: 0.23),
                                   ),
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/images/rs_66.png",
-                                      width: 64.w,
-                                      fit: BoxFit.contain,
-                                    ),
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    "assets/images/rs_66.png",
+                                    width: 64.w,
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                               ),
+                            ),
                             GestureDetector(
                               onTap: () {
                                 Get.toNamed(
