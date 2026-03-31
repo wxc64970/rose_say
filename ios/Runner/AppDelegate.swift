@@ -3,6 +3,7 @@ import UIKit
 import FBSDKCoreKit
 import AppTrackingTransparency
 import CoreTelephony
+import google_mobile_ads
 
 @main
 @objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
@@ -20,6 +21,11 @@ import CoreTelephony
     func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
         // Register plugins with `engineBridge.pluginRegistry`
         GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
+        FLTGoogleMobileAdsPlugin.registerNativeAdFactory(
+            engineBridge.pluginRegistry,
+            factoryId: "RSDiscoverNativeAd",
+            nativeAdFactory: NativeAdFactory()
+        )
         
         // Create method channels with `engineBridge.applicationRegistrar.messenger()`
         let channel = FlutterMethodChannel(

@@ -62,25 +62,75 @@ class RSBodyWidget extends GetView<RsmessageController> {
                           child: Row(
                             spacing: 24.w,
                             children: [
-                              Container(
-                                width: 84.w,
-                                height: 84.w,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(84.r),
-                                  border: Border.all(
-                                    width: 2.w,
-                                    color: const Color(0xffABC4E4),
+                              Stack(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      if (RS.storage.isRSB &&
+                                          controller.state.role.videoChat ==
+                                              true) {
+                                        RSlogEvent('c_videocall');
+                                        Get.toNamed(
+                                          RSRouteNames.phoneGuide,
+                                          arguments: {
+                                            'role': controller.state.role,
+                                          },
+                                        );
+                                      } else {
+                                        Get.toNamed(
+                                          RSRouteNames.profile,
+                                          arguments: controller.state.role,
+                                        );
+                                      }
+                                    },
+                                    child: Container(
+                                      width: 84.w,
+                                      height: 84.w,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          84.r,
+                                        ),
+                                        border: Border.all(
+                                          width: 2.w,
+                                          color: const Color(0xffABC4E4),
+                                        ),
+                                      ),
+                                      child: RSImageWidget(
+                                        url: controller.state.role.avatar,
+                                        width: 84.w,
+                                        height: 84.w,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                child: RSImageWidget(
-                                  url: controller.state.role.avatar,
-                                  width: 84.w,
-                                  height: 84.w,
-                                  shape: BoxShape.circle,
-                                ),
+                                  if (RS.storage.isRSB &&
+                                      controller.state.role.videoChat == true)
+                                    Positioned(
+                                      right: 0,
+                                      bottom: 0,
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () {
+                                          RSlogEvent('c_videocall');
+                                          Get.toNamed(
+                                            RSRouteNames.phoneGuide,
+                                            arguments: {
+                                              'role': controller.state.role,
+                                            },
+                                          );
+                                        },
+                                        child: Image.asset(
+                                          "assets/images/rs_67.png",
+                                          width: 36.w,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                    ),
+                                ],
                               ),
                               ConstrainedBox(
-                                constraints: BoxConstraints(maxWidth: 260.w),
+                                constraints: BoxConstraints(maxWidth: 190.w),
                                 child: Text(
                                   controller.state.role.name ?? '',
                                   overflow: TextOverflow.ellipsis,
@@ -136,6 +186,67 @@ class RSBodyWidget extends GetView<RsmessageController> {
                                 ),
                               ),
                             ),
+                            if (RS.storage.isRSB)
+                              GestureDetector(
+                                onTap: () {
+                                  RSlogEvent('c_call');
+                                  if (!RS.login.vipStatus.value) {
+                                    Get.toNamed(
+                                      RSRouteNames.vip,
+                                      arguments: VipFrom.call,
+                                    );
+                                    return;
+                                  }
+
+                                  if (!RS.login.checkBalance(
+                                    ConsumeFrom.call,
+                                  )) {
+                                    Get.toNamed(
+                                      RSRouteNames.gems,
+                                      arguments: ConsumeFrom.call,
+                                    );
+                                    return;
+                                  }
+
+                                  final sessionId = controller.state.sessionId;
+                                  if (sessionId == null) {
+                                    RSToast.show(
+                                      'Please select a user to call.',
+                                    );
+                                    return;
+                                  }
+
+                                  RoutePages.pushPhone(
+                                    sessionId: sessionId,
+                                    role: controller.state.role,
+                                    showVideo: false,
+                                  );
+                                },
+                                child: Container(
+                                  width: 64.w,
+                                  height: 64.w,
+                                  // margin: EdgeInsets.only(left: 24.w),
+                                  decoration: BoxDecoration(
+                                    color: const Color(
+                                      0xffCCDEFF,
+                                    ).withValues(alpha: 0.1),
+                                    borderRadius: BorderRadius.circular(100.r),
+                                    border: Border.all(
+                                      width: 1.w,
+                                      color: Colors.white.withValues(
+                                        alpha: 0.23,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/images/rs_66.png",
+                                      width: 64.w,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             GestureDetector(
                               onTap: () {
                                 Get.toNamed(
@@ -231,7 +342,17 @@ class RSBodyWidget extends GetView<RsmessageController> {
               left: 0,
               right: 0,
               top: kToolbarHeight + 18.w,
-              child: const SafeArea(child: Column(children: [RSLelWidget()])),
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    const RSLelWidget(),
+                    if (RS.storage.isRSB) ...[
+                      SizedBox(height: 24.w),
+                      const RSImgAlbum(),
+                    ],
+                  ],
+                ),
+              ),
             ),
             Obx(() {
               final vip = RS.login.vipStatus.value;

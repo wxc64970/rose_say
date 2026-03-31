@@ -78,7 +78,7 @@ dependencies:
   crypto: ^3.0.7
   flutter_image_compress: ^2.4.0
   #广告插件
-  # google_mobile_ads: ^7.0.0
+  google_mobile_ads: ^7.0.0
   shared_preferences: ^2.5.4
   #运营商信息
   carrier_info: ^3.0.3

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:rose_say/rsCommon/index.dart';
 
 import '../index.dart';
+import 'rs_time_widget.dart';
 import 'rs_vip_list.dart';
 
 /// hello
@@ -15,7 +16,9 @@ class RSBodyWidget extends GetView<RssubscribeController> {
     return Stack(
       children: [
         Image.asset(
-          "assets/images/rs_59.png",
+          RS.storage.isRSB
+              ? "assets/images/rs_69.png"
+              : "assets/images/rs_59.png",
           width: Get.width,
           fit: BoxFit.contain,
         ),
@@ -65,10 +68,9 @@ class RSBodyWidget extends GetView<RssubscribeController> {
                     GestureDetector(
                       onTap: () => RSPayUtils().restore(),
                       child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 8.w,
-                          horizontal: 12.w,
-                        ),
+                        margin: EdgeInsets.symmetric(vertical: 10.w),
+                        height: 60.w,
+                        padding: EdgeInsets.symmetric(horizontal: 27.w),
                         // margin: EdgeInsets.only(left: 24.w),
                         decoration: BoxDecoration(
                           color: const Color(0xffCCDEFF).withValues(alpha: 0.1),
@@ -78,11 +80,13 @@ class RSBodyWidget extends GetView<RssubscribeController> {
                             color: Colors.white.withValues(alpha: 0.23),
                           ),
                         ),
-                        child: Text(
-                          RSTextData.restore,
-                          style: TextStyle(
-                            fontSize: 28.sp,
-                            color: const Color(0xFFFFFFFF),
+                        child: Center(
+                          child: Text(
+                            RSTextData.restore,
+                            style: TextStyle(
+                              fontSize: 28.sp,
+                              color: const Color(0xFFFFFFFF),
+                            ),
                           ),
                         ),
                       ),
@@ -132,7 +136,7 @@ class RSBodyWidget extends GetView<RssubscribeController> {
                   ),
                 ),
                 SizedBox(height: 24.w),
-                // if (RS.storage.isRSB) const TimerWidget(),
+                if (RS.storage.isRSB) const TimerWidget(),
                 if (!RS.storage.isRSB) _buildSubscriptionInfo(),
                 SizedBox(height: 24.w),
                 _buildPurchaseButton(),

@@ -178,8 +178,8 @@ class RSAppLogEvent {
   String get androidURL => RSAppConstants.isDebug ? "" : "";
 
   String get iosURL => RSAppConstants.isDebug
-      ? 'https://test-rondo.chatjoyapp.com/fraser/stallion'
-      : 'https://rondo.chatjoyapp.com/gujarat/automat/gabble';
+      ? 'https://test-nut.rosesayapp.com/trend/byroad'
+      : 'https://nut.rosesayapp.com/oenology/fawn/widen';
 
   late final Dio _dio = Dio(
     BaseOptions(
@@ -206,30 +206,30 @@ class RSAppLogEvent {
       final osVersion = await RSInfoUtils.getOsVersion();
       final idfa = await RSInfoUtils.getIdfa();
       final snuggly = (Get.deviceLocale ?? const Locale('en_US')).toString();
-      // final timeZone = InfoUtils.getBasicTimeZone();
+      // final timeZone = RSInfoUtils.getBasicTimeZone();
 
-      if (Platform.isAndroid) {
-        final gaid = await RSInfoUtils.getGoogleAdId();
-        final androidId = await RSInfoUtils.getAndroidId();
-        return {"isocline": androidId, "trw": gaid, "piraeus": deviceId};
-      }
+      // if (Platform.isAndroid) {
+      //   final gaid = await RSInfoUtils.getGoogleAdId();
+      //   final androidId = await RSInfoUtils.getAndroidId();
+      //   return {"isocline": androidId, "trw": gaid, "piraeus": deviceId};
+      // }
 
       final logId = uuid.generate();
 
       return {
-        "fugue": "com.chatj.joyc",
-        "roger": "client",
-        "mafia": version,
-        "piraeus": deviceId,
-        "gross": logId,
-        "frazzle": uniqueTimestamp,
-        "palliate": manufacturer,
-        "frothy": deviceModel,
-        "hangdog": osVersion,
-        "enter": "mcc",
-        "sluice": snuggly,
-        "swollen": idfa,
-        "cationic": idfv,
+        "sad": {
+          "monsanto": RSAppConstants.bundleIdIOS,
+          "adrian": version,
+          "shirley": deviceId,
+          "oily": manufacturer,
+          "tolstoy": deviceModel,
+          "jawbone": osVersion,
+          "defunct": "mcc",
+          "shelter": snuggly,
+          "acanthus": idfa,
+          "sedan": idfv,
+        },
+        "berth": {"chaplin": "zip", "zulu": logId, "otis": uniqueTimestamp},
       };
     } catch (e) {
       log.e('_getCommonParams error: $e');
@@ -249,22 +249,22 @@ class RSAppLogEvent {
       if (Platform.isAndroid) {
         // TODO:-
       } else {
-        data["oily"] = "lottery";
-        data["cordon"] = "build/$build";
-        data["turban"] = agent;
-        data["skullcap"] = isLimitAdTrackingEnabled ? 'orb' : 'manse';
-        data["pivot"] = DateTime.now().millisecondsSinceEpoch;
-        data["quarry"] = DateTime.now().millisecondsSinceEpoch;
-        data["mason"] = DateTime.now().millisecondsSinceEpoch;
-        data["tablet"] = DateTime.now().millisecondsSinceEpoch;
-        data["ehrlich"] = DateTime.now().millisecondsSinceEpoch;
-        data["mannitol"] = DateTime.now().millisecondsSinceEpoch;
+        data["doormen"] = "danish";
+        data["falmouth"] = "build/$build";
+        data["racial"] = agent;
+        data["music"] = isLimitAdTrackingEnabled ? 'prism' : 'glutton';
+        data["simian"] = DateTime.now().millisecondsSinceEpoch;
+        data["pose"] = DateTime.now().millisecondsSinceEpoch;
+        data["reedy"] = DateTime.now().millisecondsSinceEpoch;
+        data["stick"] = DateTime.now().millisecondsSinceEpoch;
+        data["hill"] = DateTime.now().millisecondsSinceEpoch;
+        data["inductor"] = DateTime.now().millisecondsSinceEpoch;
       }
 
       final logModel = RSEventData(
         eventType: 'install',
         data: jsonEncode(data),
-        createTime: data['frazzle'],
+        createTime: data['berth']['otis'],
         id: data.logId,
         sequenceId: RSLogEventDBService.currentSequenceId,
       );
@@ -286,13 +286,13 @@ class RSAppLogEvent {
       if (Platform.isAndroid) {
         // TODO:-
       } else {
-        data['hilbert'] = {};
+        data['doormen'] = "upend";
       }
       final logModel = RSEventData(
         id: data.logId,
         eventType: 'session',
         data: jsonEncode(data),
-        createTime: data['frazzle'],
+        createTime: data['berth']['otis'],
         sequenceId: RSLogEventDBService.currentSequenceId,
       );
       await _adLogService.insertLog(logModel);
@@ -319,16 +319,17 @@ class RSAppLogEvent {
         //   data['$key@tung'] = value;
         // });
       } else if (Platform.isIOS) {
-        data['oily'] = name;
+        data['doormen'] = name;
+        data.addAll(params);
         // 处理自定义参数
-        params.forEach((key, value) {
-          data['keenan>$key'] = value;
-        });
+        // params.forEach((key, value) {
+        //   data['keenan>$key'] = value;
+        // });
       }
       final logModel = RSEventData(
         eventType: name,
         data: jsonEncode(data),
-        createTime: data['frazzle'],
+        createTime: data['berth']['otis'],
         id: data.logId,
         sequenceId: RSLogEventDBService.currentSequenceId,
       );
@@ -351,16 +352,17 @@ class RSAppLogEvent {
       if (data == null) {
         return;
       }
-      final logId = data["instill"]["guthrie"];
-      data['blomberg'] = {
-        "right": value?.toInt() ?? 0,
-        "limbic": currency,
-        "shoshone": "admob",
-        "hecate": "admob",
-        "robotics": adid,
-        "sorenson": placement,
-        "our": adType,
-      };
+      final logId = data.logId;
+      data.addAll({
+        "doormen": "vamp",
+        "woodcut": value?.toInt() ?? 0,
+        "suppose": currency,
+        "tzeltal": "admob",
+        "chlorine": "admob",
+        "clause": adid,
+        "menhaden": placement,
+        "largesse": adType,
+      });
       final logModel = RSEventData(
         eventType: 'ad',
         data: jsonEncode(data),
@@ -530,7 +532,7 @@ extension Clannish on Map<String, dynamic> {
     if (Platform.isAndroid) {
       return ''; //TODO:
     } else {
-      return this['gross'];
+      return this['berth']['zulu'];
     }
   }
 }

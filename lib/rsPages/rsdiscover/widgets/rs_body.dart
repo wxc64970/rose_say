@@ -125,7 +125,7 @@ class RSBodyWidget extends GetView<RsdiscoverController> {
               }),
             ],
           ),
-          SizedBox(height: 47.w),
+          SizedBox(height: 36.w),
           const Expanded(child: BuildDiscoveryList()),
         ],
       ),

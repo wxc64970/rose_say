@@ -12,20 +12,20 @@ class RSOtherBlock {
   }
 
   static Future<(bool, String)> check() async {
-    var localAllows = FirebaseRemoteConfig.instance.getString("Qw2k9X");
+    var localAllows = FirebaseRemoteConfig.instance.getString("7sK2pR9");
     final deviceId = await RS.storage.getDeviceId();
     if (localAllows.contains(deviceId)) {
       return (true, 'whitelist');
     }
 
     // 判断是否所有用户走判断
-    var userMode = FirebaseRemoteConfig.instance.getBool("Bv5s1G");
+    var userMode = FirebaseRemoteConfig.instance.getBool("Df5Gz8Q");
     if (userMode == false) {
       return (false, 'user_mode_close');
     }
 
     //默认为open, 全部走判断
-    var interceptMode = FirebaseRemoteConfig.instance.getBool("Zn7p3R");
+    var interceptMode = FirebaseRemoteConfig.instance.getBool("V8nS3kL");
     if (interceptMode == false) {
       return (true, 'intercept_mode_close');
     }
@@ -52,7 +52,7 @@ class RSOtherBlock {
     }
 
     //判断是否有sim卡
-    var hasSim = await RSSimBook.saHasSimCard();
+    var hasSim = await RSSimBook.rsHasSimCard();
     _log('hasSim status: $hasSim');
     if (!hasSim) {
       return (false, 'no_sim_card');

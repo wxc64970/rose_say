@@ -55,16 +55,11 @@ class RoutePages {
       page: () => const RslanguagePage(),
       binding: RslanguageBinding(),
     ),
-    // GetPage(
-    //   name: RSRouteNames.undr,
-    //   page: () => const SaundrPage(),
-    //   binding: SaundrBinding(),
-    // ),
-    // GetPage(
-    //   name: RSRouteNames.aiGenerateImage,
-    //   page: () => const SaaigenerateimagePage(),
-    //   binding: SaaigenerateimageBinding(),
-    // ),
+    GetPage(
+      name: RSRouteNames.undr,
+      page: () => const RsundrPage(),
+      binding: RsundrBinding(),
+    ),
     GetPage(
       name: RSRouteNames.imagePreview,
       page: () => const RSImagePreviewScreen(),
@@ -72,16 +67,6 @@ class RoutePages {
       fullscreenDialog: true,
       preventDuplicates: true,
     ),
-    // GetPage(
-    //   name: RSRouteNames.aiGenerateLoading,
-    //   page: () => const SaaigenerateloadingPage(),
-    // ),
-    // GetPage(name: RSRouteNames.aiImage, page: () => const SaaiimagePage()),
-    // GetPage(
-    //   name: RSRouteNames.aiGenerateResult,
-    //   page: () => const SaaigenerateresultPage(),
-    //   binding: SaaigenerateresultBinding(),
-    // ),
     GetPage(
       name: RSRouteNames.aiGenerateHistory,
       page: () => const RsaigeneratehistoryPage(),
@@ -104,32 +89,32 @@ class RoutePages {
       preventDuplicates: true,
     ),
 
-    // GetPage(
-    //   name: RSRouteNames.phone,
-    //   page: () => const SacallPage(),
-    //   transition: Transition.downToUp,
-    //   popGesture: false,
-    //   preventDuplicates: true,
-    //   fullscreenDialog: true,
-    //   binding: SacallBinding(),
-    // ),
-    // GetPage(
-    //   name: RSRouteNames.phoneGuide,
-    //   page: () => const SacallguidePage(),
-    //   transition: Transition.downToUp,
-    //   popGesture: false,
-    //   preventDuplicates: true,
-    //   fullscreenDialog: true,
-    // ),
-    // GetPage(
-    //   name: RSRouteNames.countSku,
-    //   page: () => const SaaiskuPage(),
-    //   transition: Transition.downToUp,
-    //   popGesture: false,
-    //   preventDuplicates: true,
-    //   fullscreenDialog: true,
-    //   binding: SaaiskuBinding(),
-    // ),
+    GetPage(
+      name: RSRouteNames.phone,
+      page: () => const RscallPage(),
+      transition: Transition.downToUp,
+      popGesture: false,
+      preventDuplicates: true,
+      fullscreenDialog: true,
+      binding: RscallBinding(),
+    ),
+    GetPage(
+      name: RSRouteNames.phoneGuide,
+      page: () => const RscallguidePage(),
+      transition: Transition.downToUp,
+      popGesture: false,
+      preventDuplicates: true,
+      fullscreenDialog: true,
+    ),
+    GetPage(
+      name: RSRouteNames.countSku,
+      page: () => const RsaiskuPage(),
+      transition: Transition.downToUp,
+      popGesture: false,
+      preventDuplicates: true,
+      fullscreenDialog: true,
+      binding: RsaiskuBinding(),
+    ),
   ];
 
   static Future<void> pushChat(

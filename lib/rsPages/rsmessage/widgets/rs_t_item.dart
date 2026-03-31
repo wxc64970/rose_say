@@ -219,43 +219,44 @@ class _TextItemState extends State<RSTItem> {
     // );
     return Row(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16.r),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: 10.w, // 水平模糊度（对应 blur 10px）
-              sigmaY: 10.w, // 垂直模糊度（对应 blur 10px）
-            ),
-            // 关键2：实现 box-shadow + 背景半透（需嵌套 Container）
-            child: Container(
-              height: 68.w,
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              decoration: BoxDecoration(
-                color: Colors.white24,
-                borderRadius: BorderRadius.circular(16.r),
+        if (_isLastMessage(msg) || !RS.storage.isRSB)
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16.r),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 10.w, // 水平模糊度（对应 blur 10px）
+                sigmaY: 10.w, // 垂直模糊度（对应 blur 10px）
               ),
-              child: Row(
-                spacing: 16.w,
-                children: [
-                  if (_isLastMessage(msg)) ..._buildMsgActions(msg),
-                  if (!RS.storage.isRSB)
-                    Row(
-                      spacing: 16.w,
-                      children: [
-                        if (_isLastMessage(msg))
-                          Container(
-                            width: 2.w,
-                            height: 20.w,
-                            color: Colors.white24,
-                          ),
-                        _buildReportButton(),
-                      ],
-                    ),
-                ],
+              // 关键2：实现 box-shadow + 背景半透（需嵌套 Container）
+              child: Container(
+                height: 68.w,
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                decoration: BoxDecoration(
+                  color: Colors.white24,
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: Row(
+                  spacing: 16.w,
+                  children: [
+                    if (_isLastMessage(msg)) ..._buildMsgActions(msg),
+                    if (!RS.storage.isRSB)
+                      Row(
+                        spacing: 16.w,
+                        children: [
+                          if (_isLastMessage(msg))
+                            Container(
+                              width: 2.w,
+                              height: 20.w,
+                              color: Colors.white24,
+                            ),
+                          _buildReportButton(),
+                        ],
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

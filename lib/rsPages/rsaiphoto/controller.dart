@@ -280,7 +280,6 @@ class RsaiphotoController extends GetxController {
 
     log.d('Generation complete with result: $result progress: 1.0');
     isLoading = false;
-
     if (RoutePages.history.last == RSRouteNames.application &&
         applicationCtr.state.page == 1) {
       Get.toNamed(RSRouteNames.aiGenerateHistory);

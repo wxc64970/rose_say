@@ -340,10 +340,6 @@ class RsmessageController extends GetxController {
           DialogWidget.showPositiveReview();
           RS.storage.setShowGoodCommentDialog2(true);
         }
-        // if (DialogWidget.rateLevel3Shoed == false) {
-        //   DialogWidget.showRateUs(RSTextData.rateUsMsg);
-        //   DialogWidget.rateLevel3Shoed = true;
-        // }
       }
     } else {
       checkSendCount();

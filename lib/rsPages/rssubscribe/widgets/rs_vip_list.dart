@@ -155,8 +155,11 @@ class RSVListWidget extends GetView<RssubscribeController> {
     final originalPrice = '$symbol${numFixed(rawPrice * 6, position: 2)}';
     final title = getSkuTitle;
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      spacing: 24.w,
       children: [
+        ClipOval(
+          child: Container(width: 16.w, height: 16.w, color: Colors.white),
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -168,7 +171,6 @@ class RSVListWidget extends GetView<RssubscribeController> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 8.w),
             Row(
               children: [
                 Image.asset(
@@ -181,7 +183,7 @@ class RSVListWidget extends GetView<RssubscribeController> {
                   '+${sku.number}',
                   style: TextStyle(
                     fontSize: 28.sp,
-                    color: Colors.white,
+                    color: RSAppColors.primaryColor,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -189,31 +191,30 @@ class RSVListWidget extends GetView<RssubscribeController> {
             ),
           ],
         ),
-        Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              price,
-              style: TextStyle(
-                fontSize: 40.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            //  SizedBox(width: 2),
-            Text(
-              originalPrice,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-                decoration: TextDecoration.lineThrough,
-                decorationColor: Colors.white,
-                decorationThickness: 3.w,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ],
+        Text(
+          '/',
+          style: TextStyle(fontSize: 28.sp, color: Colors.white),
+        ),
+        Text(
+          price,
+          style: TextStyle(
+            fontSize: 40.sp,
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        //  SizedBox(width: 2),
+        Text(
+          originalPrice,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: const Color(0xff617085),
+            fontSize: 24.sp,
+            decoration: TextDecoration.lineThrough,
+            decorationColor: const Color(0xff617085),
+            decorationThickness: 3.w,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ],
     );
@@ -242,65 +243,35 @@ class RSVListWidget extends GetView<RssubscribeController> {
       originalPrice = '$symbol$weekPrice';
     }
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      spacing: 24.w,
       children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Text(
-              price,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
+        ClipOval(
+          child: Container(width: 16.w, height: 16.w, color: Colors.white),
         ),
-        Expanded(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            spacing: 2,
-            children: [
-              Text(
-                originalPrice,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 40.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    '/${RSTextData.week}',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+        Text(
+          title,
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28.sp,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        Text(
+          '/',
+          style: TextStyle(fontSize: 28.sp, color: Colors.white),
+        ),
+        Text(
+          price,
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 40.sp,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],

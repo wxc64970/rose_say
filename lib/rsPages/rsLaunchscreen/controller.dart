@@ -4,6 +4,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rose_say/rsCommon/index.dart';
+import 'package:rose_say/rsPages/ad/rs_my_ad.dart';
 
 class RslaunchscreenController extends GetxController {
   RslaunchscreenController();
@@ -11,6 +12,7 @@ class RslaunchscreenController extends GetxController {
   double _progressValue = 0.0;
   Timer? _progressTimer;
   bool _isProgressComplete = false;
+  bool isAdLoaded = false;
 
   _initData() {
     EasyRefresh.defaultHeaderBuilder = () =>
@@ -59,10 +61,29 @@ class RslaunchscreenController extends GetxController {
 
       await RS.login.fetchUserInfo();
 
+      await MyAd().initAdConfig();
+
+      var startTimer = DateTime.now().millisecondsSinceEpoch;
+      await _preloadAd();
+      var endTimer = DateTime.now().millisecondsSinceEpoch;
+      var adTimer = (endTimer - startTimer) / 1000;
+      log.d('启动加载广告时间：$adTimer秒');
+
       _completeSetup();
     } catch (e) {
       log.e('Splash setup error: $e');
       _completeSetup();
+    }
+  }
+
+  Future<void> _preloadAd() async {
+    try {
+      MyAd().preloadAds();
+      isAdLoaded = await MyAd().loadOpenAd();
+      // log.d('Ad preload _isAdLoaded: $_isAdLoaded');
+    } catch (e) {
+      isAdLoaded = false;
+      log.d('Ad preload error: $e');
     }
   }
 
@@ -74,6 +95,25 @@ class RslaunchscreenController extends GetxController {
   }
 
   Future<void> _navigateToMain() async {
+    // 设置最多重试 10 次（每次间隔 700ms，总共约 7 秒）
+    int maxRetries = 10;
+    int retryCount = 0;
+
+    // 持续尝试加载广告直到成功或达到重试限制
+    while (!isAdLoaded && retryCount < maxRetries) {
+      isAdLoaded = await MyAd().loadOpenAd();
+      if (isAdLoaded) {
+        log.d('广告加载成功，跳转主页');
+        break;
+      }
+      retryCount++;
+      if (retryCount < maxRetries) {
+        await Future.delayed(const Duration(milliseconds: 700));
+      }
+    }
+
+    // 无论广告是否加载成功，都跳转到主页
+    log.d('广告加载完成 (成功: $isAdLoaded)，跳转到主页');
     Get.offAllNamed(RSRouteNames.application);
   }
 

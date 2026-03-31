@@ -68,12 +68,20 @@ class RsapplicationPage extends GetView<RsapplicationController> {
       controller: controller.pageController,
       onPageChanged: controller.handlePageChanged,
 
-      children: const [
-        RsdiscoverPage(),
-        RsaiphotoPage(),
-        RschatPage(),
-        RsmePage(),
-      ],
+      children: RS.storage.isRSB
+          ? [
+              const RsdiscoverPage(),
+              const RschatPage(),
+              const RsmomentsPage(),
+              const RsaiphotobPage(),
+              const RsmePage(),
+            ]
+          : [
+              const RsdiscoverPage(),
+              const RsaiphotoPage(),
+              const RschatPage(),
+              const RsmePage(),
+            ],
     );
   }
 

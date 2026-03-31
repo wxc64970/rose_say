@@ -55,75 +55,128 @@ class RsapplicationController extends GetxController
     super.onInit();
     // 注册监听器
     WidgetsBinding.instance.addObserver(this);
-    bottomTabs = <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: Image.asset(
-          "assets/tabbar/rs_home_inactive.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        activeIcon: Image.asset(
-          "assets/tabbar/rs_home_active.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        label: 'Home',
-      ),
-      BottomNavigationBarItem(
-        icon: Image.asset(
-          "assets/tabbar/rs_aiphoto_inactive.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        activeIcon: Image.asset(
-          "assets/tabbar/rs_aiphoto_active.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        label: 'AI Photo',
-      ),
-      BottomNavigationBarItem(
-        icon: Image.asset(
-          "assets/tabbar/rs_chat_inactive.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        activeIcon: Image.asset(
-          "assets/tabbar/rs_chat_active.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        label: 'Chat',
-      ),
-      if (RS.storage.isRSB)
-        BottomNavigationBarItem(
-          icon: Image.asset(
-            "assets/tabbar/rs_explore_inactive.png",
-            width: 48.w,
-            fit: BoxFit.contain,
-          ),
-          activeIcon: Image.asset(
-            "assets/tabbar/rs_explore_active.png",
-            width: 48.w,
-            fit: BoxFit.contain,
-          ),
-          label: 'Explore',
-        ),
-
-      BottomNavigationBarItem(
-        icon: Image.asset(
-          "assets/tabbar/rs_me_inactive.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        activeIcon: Image.asset(
-          "assets/tabbar/rs_me_active.png",
-          width: 48.w,
-          fit: BoxFit.contain,
-        ),
-        label: 'Me',
-      ),
-    ];
+    bottomTabs = RS.storage.isRSB
+        ? <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/tabbar/rs_home_inactive.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              activeIcon: Image.asset(
+                "assets/tabbar/rs_home_active.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/tabbar/rs_chat_inactive.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              activeIcon: Image.asset(
+                "assets/tabbar/rs_chat_active.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              label: 'Chat',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/tabbar/rs_explore_inactive.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              activeIcon: Image.asset(
+                "assets/tabbar/rs_explore_active.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              label: 'Explore',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/tabbar/rs_aiphoto_inactive.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              activeIcon: Image.asset(
+                "assets/tabbar/rs_aiphoto_active.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              label: 'AI Photo',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/tabbar/rs_me_inactive.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              activeIcon: Image.asset(
+                "assets/tabbar/rs_me_active.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              label: 'Me',
+            ),
+          ]
+        : <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/tabbar/rs_home_inactive.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              activeIcon: Image.asset(
+                "assets/tabbar/rs_home_active.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/tabbar/rs_aiphoto_inactive.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              activeIcon: Image.asset(
+                "assets/tabbar/rs_aiphoto_active.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              label: 'AI Photo',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/tabbar/rs_chat_inactive.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              activeIcon: Image.asset(
+                "assets/tabbar/rs_chat_active.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              label: 'Chat',
+            ),
+            BottomNavigationBarItem(
+              icon: Image.asset(
+                "assets/tabbar/rs_me_inactive.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              activeIcon: Image.asset(
+                "assets/tabbar/rs_me_active.png",
+                width: 48.w,
+                fit: BoxFit.contain,
+              ),
+              label: 'Me',
+            ),
+          ];
     if (Get.arguments != null) {
       state.page = Get.arguments['page'];
     }
