@@ -155,18 +155,14 @@ class RSFilterWidget extends GetView<RsdiscoverController> {
           Row(
             spacing: 32.w,
             children: [
-              InkWell(
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
+              GestureDetector(
                 onTap: () {
                   controller.selectedType.value = type1;
                 },
                 child: Obx(() => buildTitleItem(type1)),
               ),
               if (type2 != null)
-                InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+                GestureDetector(
                   onTap: () {
                     controller.selectedType.value = type2;
                   },
@@ -207,12 +203,13 @@ class RSFilterWidget extends GetView<RsdiscoverController> {
   Widget buildTitleItem(RSTagsModel type) {
     bool isSelected = type == controller.selectedType.value;
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         isSelected
             ? Positioned(
                 bottom: 0,
                 right: -10.w,
-                width: 66.w,
+                width: 62.w,
                 child: Center(
                   child: Image.asset(
                     "assets/images/rs_01.png",
@@ -225,11 +222,12 @@ class RSFilterWidget extends GetView<RsdiscoverController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              type.labelType ?? '',
+              '${type.labelType} ',
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: isSelected ? RSAppColors.primaryColor : Colors.white,
                 fontSize: 28.sp,
+                height: 1.8,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
               ),
             ),

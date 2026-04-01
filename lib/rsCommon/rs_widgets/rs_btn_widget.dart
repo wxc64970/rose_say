@@ -108,9 +108,11 @@ class ButtonGradientWidget extends StatelessWidget {
     this.margin,
     this.gradientColors = const [
       Color(0xffF2FAFF),
+      Color(0xffC5DDFC),
       Color(0xffA2C4EF),
       Color(0xffA2C4EF),
       Color(0xffA2C4EF),
+      Color(0xffC5DDFC),
       Color(0xffF3FCFE),
     ],
     this.hasShadow = false,
@@ -145,9 +147,9 @@ class ButtonGradientWidget extends StatelessWidget {
         borderRadius: br,
         gradient: LinearGradient(
           colors: gradientColors,
-          begin: const Alignment(-0.0349, -0.9994),
-          end: const Alignment(0.0349, 0.9994),
-          // stops: const [0.0, 0.25, 0.8, 1.0],
+          begin: const Alignment(-0.018, -0.9999),
+          end: const Alignment(0.018, 0.9999),
+          // stops: const [0.0, 0.1, 0.35, 0.5, 0.75, 0.9, 1.0],
           // 4. 渐变超出范围时的填充模式（确保底部完全是目标色）
           tileMode: TileMode.clamp,
         ),

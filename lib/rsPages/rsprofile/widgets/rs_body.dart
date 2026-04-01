@@ -248,216 +248,223 @@ class RSBodyWidget extends GetView<RsprofileController> {
                         ],
                       ),
                     ),
-                    SingleChildScrollView(
+                    Padding(
                       padding: EdgeInsets.all(32.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            spacing: 8.w,
-                            children: [
-                              ConstrainedBox(
-                                constraints: BoxConstraints(maxWidth: 360.w),
-                                child: Text(
-                                  controller.role.name ?? '',
-                                  style: TextStyle(
-                                    fontSize: 40.sp,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
+                      child: SingleChildScrollView(
+                        padding: EdgeInsets.zero,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              spacing: 8.w,
+                              children: [
+                                ConstrainedBox(
+                                  constraints: BoxConstraints(maxWidth: 360.w),
+                                  child: Text(
+                                    controller.role.name ?? '',
+                                    style: TextStyle(
+                                      fontSize: 40.sp,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
                                 ),
-                              ),
-                              controller.role.age == null
-                                  ? const SizedBox()
-                                  : GradientText(
-                                      text: '${controller.role.age}',
-                                      fontSize: 20.sp,
-                                      // 自定义渐变颜色
-                                      gradientColors: const [
-                                        Color(0xFF43FFF4),
-                                        Color(0xFFDAF538),
-                                      ],
-                                    ),
-                            ],
-                          ),
-                          SizedBox(height: 16.w),
-                          Text(
-                            controller.role.aboutMe ?? '',
-                            style: TextStyle(
-                              fontSize: 24.sp,
-                              color: const Color(0xff617085),
+                                controller.role.age == null
+                                    ? const SizedBox()
+                                    : GradientText(
+                                        text: '${controller.role.age}',
+                                        fontSize: 20.sp,
+                                        // 自定义渐变颜色
+                                        gradientColors: const [
+                                          Color(0xFF43FFF4),
+                                          Color(0xFFDAF538),
+                                        ],
+                                      ),
+                              ],
                             ),
-                          ),
-                          if (RS.storage.isRSB) ...[
-                            SizedBox(height: 24.w),
-                            controller.role.tags == null ||
-                                    controller.role.tags!.isEmpty
-                                ? const SizedBox()
-                                : Container(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 24.w,
-                                      horizontal: 16.w,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(22.r),
-                                      color: const Color(0xff181B28),
-                                    ),
-                                    child: Column(
-                                      spacing: 20.w,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          spacing: 12.w,
-                                          children: [
-                                            Image.asset(
-                                              "assets/images/rs_39.png",
-                                              width: 30.w,
-                                              fit: BoxFit.contain,
-                                            ),
-                                            Text(
-                                              RSTextData.tagsTitle,
-                                              style: TextStyle(
-                                                fontSize: 28.sp,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ],
+                            SizedBox(height: 16.w),
+                            Text(
+                              controller.role.aboutMe ?? '',
+                              style: TextStyle(
+                                fontSize: 24.sp,
+                                color: const Color(0xff617085),
+                              ),
+                            ),
+                            if (RS.storage.isRSB) ...[
+                              SizedBox(height: 24.w),
+                              controller.role.tags == null ||
+                                      controller.role.tags!.isEmpty
+                                  ? const SizedBox()
+                                  : Container(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 24.w,
+                                        horizontal: 16.w,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          22.r,
                                         ),
-                                        SizedBox(
-                                          width: Get.width,
-                                          height: 44.w,
-                                          child: ListView.builder(
-                                            itemCount:
-                                                controller.role.tags!.length,
-                                            scrollDirection: Axis.horizontal,
-                                            itemBuilder: (context, index) {
-                                              var tag =
-                                                  controller.role.tags![index];
-                                              return Container(
-                                                height: 44.w,
-                                                margin: EdgeInsets.only(
-                                                  right: 16.w,
+                                        color: const Color(0xff181B28),
+                                      ),
+                                      child: Column(
+                                        spacing: 20.w,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            spacing: 12.w,
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/rs_39.png",
+                                                width: 30.w,
+                                                fit: BoxFit.contain,
+                                              ),
+                                              Text(
+                                                RSTextData.tagsTitle,
+                                                style: TextStyle(
+                                                  fontSize: 28.sp,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
                                                 ),
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 12.w,
-                                                ),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                        40.r,
-                                                      ),
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      Colors.white.withValues(
-                                                        alpha: 0.1,
-                                                      ),
-                                                      Colors.white.withValues(
-                                                        alpha: 0.02,
-                                                      ),
-                                                    ],
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: Get.width,
+                                            height: 44.w,
+                                            child: ListView.builder(
+                                              itemCount:
+                                                  controller.role.tags!.length,
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (context, index) {
+                                                var tag = controller
+                                                    .role
+                                                    .tags![index];
+                                                return Container(
+                                                  height: 44.w,
+                                                  margin: EdgeInsets.only(
+                                                    right: 16.w,
                                                   ),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    tag,
-                                                    style: TextStyle(
-                                                      fontSize: 24.sp,
-                                                      color: Colors.white
-                                                          .withValues(
-                                                            alpha: 0.8,
-                                                          ),
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 12.w,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          40.r,
+                                                        ),
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        Colors.white.withValues(
+                                                          alpha: 0.1,
+                                                        ),
+                                                        Colors.white.withValues(
+                                                          alpha: 0.02,
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                            Obx(() {
-                              final images = controller.images;
-                              if (images.isEmpty) {
-                                return const SizedBox();
-                              }
-                              final imageCount = images.length;
-                              return Container(
-                                margin: EdgeInsets.only(top: 18.w),
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 24.w,
-                                  horizontal: 16.w,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(22.r),
-                                  color: const Color(0xff181B28),
-                                ),
-                                child: Column(
-                                  spacing: 20.w,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      spacing: 12.w,
-                                      children: [
-                                        Image.asset(
-                                          "assets/images/rs_39.png",
-                                          width: 30.w,
-                                          fit: BoxFit.contain,
-                                        ),
-                                        Text(
-                                          RSTextData.ai_photos,
-                                          style: TextStyle(
-                                            fontSize: 28.sp,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      width: Get.width,
-                                      height: 160.w,
-                                      child: ListView.separated(
-                                        padding: EdgeInsets.zero,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (_, idx) {
-                                          final image = images[idx];
-                                          final unlocked =
-                                              image.unlocked ?? false;
-                                          return PhotoAlbumItem(
-                                            imageHeight: 160.w,
-                                            image: image,
-                                            avatar: controller.role.avatar,
-                                            unlocked: unlocked,
-                                            onTap: () {
-                                              if (unlocked) {
-                                                controller.msgCtr.onTapImage(
-                                                  image,
+                                                  child: Center(
+                                                    child: Text(
+                                                      tag,
+                                                      style: TextStyle(
+                                                        fontSize: 24.sp,
+                                                        color: Colors.white
+                                                            .withValues(
+                                                              alpha: 0.8,
+                                                            ),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 );
-                                              } else {
-                                                controller.msgCtr
-                                                    .onTapUnlockImage(image);
-                                              }
-                                            },
-                                          );
-                                        },
-                                        itemCount: imageCount,
-                                        separatorBuilder: (_, idx) {
-                                          return SizedBox(width: 16.w);
-                                        },
+                                              },
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
-                                ),
-                              );
-                            }),
+
+                              Obx(() {
+                                final images = controller.images;
+                                if (images.isEmpty) {
+                                  return const SizedBox();
+                                }
+                                final imageCount = images.length;
+                                return Container(
+                                  margin: EdgeInsets.only(top: 18.w),
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 24.w,
+                                    horizontal: 16.w,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(22.r),
+                                    color: const Color(0xff181B28),
+                                  ),
+                                  child: Column(
+                                    spacing: 20.w,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        spacing: 12.w,
+                                        children: [
+                                          Image.asset(
+                                            "assets/images/rs_39.png",
+                                            width: 30.w,
+                                            fit: BoxFit.contain,
+                                          ),
+                                          Text(
+                                            RSTextData.ai_photos,
+                                            style: TextStyle(
+                                              fontSize: 28.sp,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        width: Get.width,
+                                        height: 160.w,
+                                        child: ListView.separated(
+                                          padding: EdgeInsets.zero,
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (_, idx) {
+                                            final image = images[idx];
+                                            final unlocked =
+                                                image.unlocked ?? false;
+                                            return PhotoAlbumItem(
+                                              imageHeight: 160.w,
+                                              image: image,
+                                              avatar: controller.role.avatar,
+                                              unlocked: unlocked,
+                                              onTap: () {
+                                                if (unlocked) {
+                                                  controller.msgCtr.onTapImage(
+                                                    image,
+                                                  );
+                                                } else {
+                                                  controller.msgCtr
+                                                      .onTapUnlockImage(image);
+                                                }
+                                              },
+                                            );
+                                          },
+                                          itemCount: imageCount,
+                                          separatorBuilder: (_, idx) {
+                                            return SizedBox(width: 16.w);
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
+                            ],
                           ],
-                        ],
+                        ),
                       ),
                     ),
                   ],
