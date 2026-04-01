@@ -414,7 +414,11 @@ class DialogWidget {
   }
 
   static Future showChatLevel() async {
-    return show(child: const RSLevelDialog(), clickMaskDismiss: false);
+    return SmartDialog.show(
+      maskColor: Colors.black.withValues(alpha: 0.8),
+      builder: (context) => const RSLevelDialog(),
+      clickMaskDismiss: false,
+    );
   }
 
   static bool _isChatRSLevelDialogVisible = false;

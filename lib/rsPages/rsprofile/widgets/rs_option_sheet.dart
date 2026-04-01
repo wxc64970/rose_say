@@ -22,23 +22,24 @@ class RSOptionSheet extends GetView<RsprofileController> {
               onTap: () {
                 Get.back();
               },
-              child: Image.asset(
-                "assets/images/rs_close.png",
-                width: 56.w,
-                fit: BoxFit.contain,
+              child: Padding(
+                padding: EdgeInsets.all(32.w),
+                child: Image.asset(
+                  "assets/images/rs_close.png",
+                  width: 56.w,
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
-            SizedBox(width: 32.w),
           ],
         ),
-        SizedBox(height: 12.w),
         Container(
           width: Get.width,
           padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
           margin: EdgeInsets.symmetric(horizontal: 32.w),
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/rs_24.png"),
+              image: AssetImage("assets/images/rs_42.png"),
               fit: BoxFit.fitWidth,
               alignment: AlignmentGeometry.topCenter,
             ),
@@ -164,6 +165,7 @@ class RSOptionSheet extends GetView<RsprofileController> {
             ],
           ),
         ),
+        // SizedBox(height: 32.w),
       ],
     );
   }

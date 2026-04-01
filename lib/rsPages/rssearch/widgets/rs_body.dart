@@ -77,6 +77,8 @@ class RSBodyWidget extends GetView<RssearchController> {
                                 fontSize: 24.sp,
                                 fontWeight: FontWeight.w400,
                               ),
+                              onSubmitted: (value) =>
+                                  controller.focusNode.unfocus(),
                               controller: controller.textController,
                               enableInteractiveSelection: true, // 确保文本选择功能启用
                               dragStartBehavior:
@@ -166,7 +168,7 @@ class RSBodyWidget extends GetView<RssearchController> {
         final data = list[index];
         // final displayTags = data.buildDisplayTags();
         // final shouldShowTags = displayTags.isNotEmpty && RS.storage.isRSB;
-        return InkWell(
+        return GestureDetector(
           onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
             RoutePages.pushChat(data.id);
@@ -192,6 +194,7 @@ class RSBodyWidget extends GetView<RssearchController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Stack(
+                  clipBehavior: Clip.none,
                   children: [
                     RSImageWidget(
                       url: data.avatar,
@@ -205,58 +208,58 @@ class RSBodyWidget extends GetView<RssearchController> {
                       ),
                       shape: BoxShape.rectangle,
                     ),
-                    Positioned(
-                      left: 0,
-                      top: 32.w,
-                      child: InkWell(
-                        onTap: () {
-                          controller.onCollect(index, data);
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(40.r),
-                            bottomRight: Radius.circular(40.r),
-                          ),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(
-                              sigmaX: 20.w, // 水平模糊度（对应 blur 10px）
-                              sigmaY: 20.w, // 垂直模糊度（对应 blur 10px）
-                            ),
-                            // 关键2：实现 box-shadow + 背景半透（需嵌套 Container）
-                            child: Container(
-                              padding: EdgeInsets.all(8.w),
-                              decoration: BoxDecoration(
-                                color: Colors.black26,
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(40.r),
-                                  bottomRight: Radius.circular(40.r),
-                                ),
-                              ),
-                              child: Row(
-                                spacing: 14.w,
-                                children: [
-                                  Image.asset(
-                                    data.collect!
-                                        ? "assets/images/rs_collected.png"
-                                        : "assets/images/rs_collect.png",
-                                    width: 40.w,
-                                    fit: BoxFit.contain,
-                                  ),
-                                  Text(
-                                    data.likes.toString(),
-                                    style: TextStyle(
-                                      fontSize: 20.sp,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(width: 8.w),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    // Positioned(
+                    //   left: 0,
+                    //   top: 32.w,
+                    //   child: InkWell(
+                    //     onTap: () {
+                    //       controller.onCollect(index, data);
+                    //     },
+                    //     child: ClipRRect(
+                    //       borderRadius: BorderRadius.only(
+                    //         topRight: Radius.circular(40.r),
+                    //         bottomRight: Radius.circular(40.r),
+                    //       ),
+                    //       child: BackdropFilter(
+                    //         filter: ImageFilter.blur(
+                    //           sigmaX: 20.w, // 水平模糊度（对应 blur 10px）
+                    //           sigmaY: 20.w, // 垂直模糊度（对应 blur 10px）
+                    //         ),
+                    //         // 关键2：实现 box-shadow + 背景半透（需嵌套 Container）
+                    //         child: Container(
+                    //           padding: EdgeInsets.all(8.w),
+                    //           decoration: BoxDecoration(
+                    //             color: Colors.black26,
+                    //             borderRadius: BorderRadius.only(
+                    //               topRight: Radius.circular(40.r),
+                    //               bottomRight: Radius.circular(40.r),
+                    //             ),
+                    //           ),
+                    //           child: Row(
+                    //             spacing: 14.w,
+                    //             children: [
+                    //               Image.asset(
+                    //                 data.collect!
+                    //                     ? "assets/images/rs_collected.png"
+                    //                     : "assets/images/rs_collect.png",
+                    //                 width: 40.w,
+                    //                 fit: BoxFit.contain,
+                    //               ),
+                    //               Text(
+                    //                 data.likes.toString(),
+                    //                 style: TextStyle(
+                    //                   fontSize: 20.sp,
+                    //                   color: Colors.white,
+                    //                 ),
+                    //               ),
+                    //               SizedBox(width: 8.w),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 Container(

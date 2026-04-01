@@ -33,13 +33,14 @@ class RSModSheet extends StatelessWidget {
         ),
         SizedBox(height: 12.w),
         Container(
-          width: Get.width,
+          width: 686.w,
           padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
           margin: EdgeInsets.symmetric(horizontal: 32.w),
+          height: 502.w,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/rs_24.png"),
-              fit: BoxFit.fitWidth,
+              image: AssetImage("assets/images/rs_25.png"),
+              fit: BoxFit.contain,
               alignment: AlignmentGeometry.topCenter,
             ),
             // borderRadius: BorderRadius.only(
@@ -125,6 +126,7 @@ class RSModSheet extends StatelessWidget {
             ],
           ),
         ),
+        SizedBox(height: 32.w),
       ],
     );
   }
