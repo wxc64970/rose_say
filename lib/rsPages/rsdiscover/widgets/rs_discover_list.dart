@@ -42,6 +42,9 @@ class BuildDiscoveryList extends GetView<RsdiscoverController> {
                       ),
                       padding: EdgeInsets.zero,
                       labelPadding: EdgeInsets.only(right: 54.w), // Tab 之间的间距
+                      overlayColor: WidgetStateProperty.all(
+                        Colors.transparent,
+                      ), // 去除点击水波纹
                       unselectedLabelStyle: TextStyle(
                         fontSize: 28.sp,
                         fontWeight: FontWeight.w400,
