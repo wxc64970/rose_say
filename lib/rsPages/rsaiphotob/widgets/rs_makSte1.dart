@@ -203,7 +203,9 @@ class _RSMakste1State extends State<RSMakste1> {
                 onTap: widget.onTapGenRole,
                 child: Center(
                   child: Text(
-                    RSTextData.ai_under_character,
+                    widget.hasHistory == true
+                        ? RSTextData.ai_view_nude
+                        : RSTextData.ai_under_character,
                     style: TextStyle(
                       fontSize: 32.sp,
                       color: Colors.black,
