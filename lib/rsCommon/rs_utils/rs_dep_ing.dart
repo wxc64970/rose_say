@@ -122,7 +122,7 @@ class RSDependencyInjection {
   /// 包含：Firebase、Adjust 等第三方 SDK
   static Future<void> _initThirdPartyServices() async {
     try {
-      RSThirdPartyService.init();
+      await RSThirdPartyService.init();
     } catch (e) {
       // 第三方服务初始化失败不应该阻塞应用启动
       debugPrint('[DI]: 第三方服务初始化失败，但不影响应用启动: $e');
