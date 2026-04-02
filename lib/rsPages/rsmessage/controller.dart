@@ -767,6 +767,8 @@ class RsmessageController extends GetxController {
   /// 在 [onDelete] 方法之前调用。
   @override
   void onClose() {
+    autoController.dispose();
+    RS.audio.stopAll();
     super.onClose();
   }
 
@@ -774,6 +776,7 @@ class RsmessageController extends GetxController {
   @override
   void dispose() {
     autoController.dispose();
+    RS.audio.stopAll();
     super.dispose();
   }
 }
