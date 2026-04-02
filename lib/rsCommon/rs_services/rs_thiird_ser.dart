@@ -100,8 +100,8 @@ class RSThirdPartyService {
       log.d('[Firebase]: Initialized ✅ app: ${app.name}');
 
       // 分步初始化Firebase服务，确保核心服务先启动
-      _initFirebaseAnalytics();
-      _initRemoteConfig();
+      await _initFirebaseAnalytics();
+      await _initRemoteConfig();
     } catch (e) {
       log.e('[Firebase]: 初始化失败 : $e');
       // 即使Firebase初始化失败，也不应该影响应用启动
@@ -127,7 +127,7 @@ class RSThirdPartyService {
       // 配置最小 fetch 时间，减少超时时间
       await remoteConfig.setConfigSettings(
         RemoteConfigSettings(
-          fetchTimeout: const Duration(seconds: 10),
+          fetchTimeout: const Duration(seconds: 5),
           minimumFetchInterval: const Duration(seconds: 30),
         ),
       );
