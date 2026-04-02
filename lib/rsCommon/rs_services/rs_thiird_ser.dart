@@ -20,17 +20,24 @@ class RSThirdPartyService {
 
   /// 初始化所有第三方服务
   static Future<void> init() async {
-    // 使用 Future.wait 但不让任何一个服务的失败影响整体启动
-    await Future.wait([
-      _initFirebase().catchError((e) {
-        log.e('[ThirdParty]: Firebase 初始化失败，但不影响启动: $e');
-        return null;
-      }),
-      _initAdjust().catchError((e) {
-        log.e('[ThirdParty]: Adjust 初始化失败，但不影响启动: $e');
-        return null;
-      }),
-    ]);
+    try {
+      await _initFirebase();
+    } catch (e) {
+      // 如果是网络错误，重新抛出以阻止应用启动
+      if (e.toString().contains('Network connection required')) {
+        log.e('[ThirdParty]: 网络连接失败，无法启动应用');
+        rethrow;
+      }
+      // 其他 Firebase 错误不影响启动
+      log.e('[ThirdParty]: Firebase 初始化失败，但不影响启动: $e');
+    }
+
+    // Adjust 初始化（失败不影响启动）
+    try {
+      await _initAdjust();
+    } catch (e) {
+      log.e('[ThirdParty]: Adjust 初始化失败，但不影响启动: $e');
+    }
   }
 
   /// Adjust 初始化
@@ -55,6 +62,39 @@ class RSThirdPartyService {
   /// Firebase 初始化
   static Future<void> _initFirebase() async {
     try {
+      // 检查网络连接状态
+      try {
+        final networkService = Get.find<RSNetworkMonitorService>();
+
+        if (!networkService.isConnected) {
+          log.w('[Firebase]: 网络未连接，等待网络连接...');
+          // 等待网络连接，最多等待10秒
+          final hasNetwork = await networkService.waitForConnection(
+            timeout: const Duration(seconds: 10),
+          );
+
+          if (!hasNetwork) {
+            log.e('[Firebase]: 网络连接失败，无法继续初始化');
+            // 抛出网络错误，阻止应用继续运行
+            throw Exception(
+              'Network connection required. Please check your internet connection and try again.',
+            );
+          }
+        }
+
+        log.d('[Firebase]: 网络已连接，开始初始化...');
+      } catch (e) {
+        // 如果是网络错误，重新抛出
+        if (e.toString().contains('Network connection required')) {
+          rethrow;
+        }
+        // 如果获取网络服务失败，继续尝试初始化 Firebase
+        log.w('[Firebase]: 无法获取网络服务状态，继续尝试初始化: $e');
+      }
+
+      // 在 release 模式下，添加短暂延迟确保网络准备就绪
+      await Future.delayed(const Duration(milliseconds: 500));
+
       FirebaseApp app = await Firebase.initializeApp();
       isFirebaseInitialized = true;
       log.d('[Firebase]: Initialized ✅ app: ${app.name}');
