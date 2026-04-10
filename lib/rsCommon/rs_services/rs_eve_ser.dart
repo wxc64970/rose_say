@@ -320,7 +320,7 @@ class RSAppLogEvent {
         // });
       } else if (Platform.isIOS) {
         data['doormen'] = name;
-        data.addAll(params);
+        data[name] = params;
         // 处理自定义参数
         // params.forEach((key, value) {
         //   data['keenan>$key'] = value;
