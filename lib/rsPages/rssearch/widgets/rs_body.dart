@@ -156,6 +156,7 @@ class RSBodyWidget extends GetView<RssearchController> {
   Widget _buildList(List<ChaterModel> list) {
     return GridView.builder(
       physics: const BouncingScrollPhysics(),
+      controller: controller.scrollController,
       itemCount: list.length,
       padding: EdgeInsets.zero,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

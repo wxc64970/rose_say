@@ -113,6 +113,9 @@ class ImageAPI {
         queryParameters: {'taskId': taskId},
       );
       var baseResponse = RSBaseModel.fromJson(res.data, null);
+      if (baseResponse.code != 200) {
+        return null;
+      }
       final json = baseResponse.data;
 
       if (json == null) {
@@ -198,7 +201,11 @@ class ImageAPI {
         RSApiUrl.aiVideoResult,
         queryParameters: {'taskId': taskId},
       );
-      final json = res.data['data'];
+      var baseResponse = RSBaseModel.fromJson(res.data, null);
+      if (baseResponse.code != 200) {
+        return null;
+      }
+      final json = res.data;
 
       if (json == null) {
         await Future.delayed(const Duration(seconds: 15));
