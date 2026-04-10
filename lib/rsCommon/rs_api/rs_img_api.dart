@@ -205,7 +205,7 @@ class ImageAPI {
       if (baseResponse.code != 200) {
         return null;
       }
-      final json = res.data;
+      final json = baseResponse.data;
 
       if (json == null) {
         await Future.delayed(const Duration(seconds: 15));
